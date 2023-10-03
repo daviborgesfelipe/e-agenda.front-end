@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { InserirContatosComponent } from './views/contatos/inserir-contatos/inserir-contatos.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app-dashboard',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'app-dashboard',
+    path: 'dashboard',
     component: DashboardComponent
-  }
+  },
+//Contatos
+ {
+  path: 'contatos/inserir', 
+  component: InserirContatosComponent
+ }
 ];
 
 @NgModule({
