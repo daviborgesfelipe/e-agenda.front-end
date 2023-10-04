@@ -7,12 +7,14 @@ import { RouterModule } from '@angular/router';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
 
 @NgModule({
   declarations: [
     InserirContatosComponent,
     ListarContatosComponent,
-    EditarContatosComponent
+    EditarContatosComponent,
+    ExcluirContatosComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { InserirContatosComponent } from './views/contatos/inserir-contatos/inserir-contatos.component';
 import { ListarContatosComponent } from './views/contatos/listar-contatos/listar-contatos.component';
 import { EditarContatosComponent } from './views/contatos/editar-contatos/editar-contatos.component';
+import { ExcluirContatosComponent } from './views/contatos/excluir-contatos/excluir-contatos.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
  {
   path: 'contatos/editar/:id', 
   component: EditarContatosComponent
+ },
+ {
+  path: 'contatos/excluir/:id', 
+  component: ExcluirContatosComponent
  }
 ];
 

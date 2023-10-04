@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
+import { VisualizarContatoViewModel } from '../models/visualizar-cotato.view-model';
 
 @Injectable()
 export class ContatosService {
@@ -21,6 +22,10 @@ export class ContatosService {
       .pipe(map((res) => res.dados));
   }
 
+  public excluir(id: string): Observable<any> {
+    return this.http.delete(this.endpoints + id, this.obterAutorizacao());
+  }
+
   public selecionarTodos(): Observable<ListarContatoViewModel[]> {
     return this.http
       .get<any>(this.endpoints, this.obterAutorizacao())
@@ -30,6 +35,17 @@ export class ContatosService {
   public selecionarPorId(id: string): Observable<FormsContatoViewModel> {
     return this.http
       .get<any>(this.endpoints + id, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarContatoCompletoPorId(
+    id: string
+  ): Observable<VisualizarContatoViewModel> {
+    return this.http
+      .get<any>(
+        this.endpoints + 'visualizacao-completa/' + id,
+        this.obterAutorizacao()
+      )
       .pipe(map((res) => res.dados));
   }
 
