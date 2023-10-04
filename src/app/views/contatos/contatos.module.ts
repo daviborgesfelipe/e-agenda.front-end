@@ -5,16 +5,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContatosService } from './services/contatos.service';
 import { RouterModule } from '@angular/router';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
+import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     InserirContatosComponent,
-    ListarContatosComponent
+    ListarContatosComponent,
+    EditarContatosComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ],
   providers: [
     ContatosService

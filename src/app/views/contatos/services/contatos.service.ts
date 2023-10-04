@@ -15,9 +15,21 @@ export class ContatosService {
     return this.http.post<any>(this.endpoints, contato, this.obterAutorizacao())
   }
 
+  public editar(id: string, contato: FormsContatoViewModel) {
+    return this.http
+      .put<any>(this.endpoints + id, contato, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
   public selecionarTodos(): Observable<ListarContatoViewModel[]> {
     return this.http
       .get<any>(this.endpoints, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarPorId(id: string): Observable<FormsContatoViewModel> {
+    return this.http
+      .get<any>(this.endpoints + id, this.obterAutorizacao())
       .pipe(map((res) => res.dados));
   }
 
