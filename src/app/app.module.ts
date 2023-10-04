@@ -25,7 +25,6 @@ import { HttpClientModule } from '@angular/common/http';
       preventDuplicates: true
     }),
     HttpClientModule,
-
     
     CoreModule,
     DashboardModule,
