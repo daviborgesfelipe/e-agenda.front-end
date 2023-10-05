@@ -15,8 +15,9 @@ export class ListarContatosComponent {
   }
 
   ngOnInit(): void {
-    this.contatosService.selecionarTodos().subscribe((res) => {
-      this.contatos = res;
+    this.contatosService.selecionarTodos()
+    .subscribe((_contatos) => {
+      this.contatos = _contatos;
     });
   }
 }

@@ -42,13 +42,33 @@ export class InserirContatosComponent implements OnInit{
   }
 
   gravar(){
-    this.contatoVM = this.formulario.value
-    this.contatoService.inserir(this.formulario.value).subscribe((res) => {
-      this.contatoVM = this.formulario.value;
+    if(this.formulario.invalid){
+      this.toastService.warning(
+        'Verifique os campos do formulario',
+        'Aviso!'
+      )
+      this.formulario.markAllAsTouched();
 
-      
-      console.log(this.formulario.value)
-      this.router.navigate(['/dashboard'])
-    })
+      return;
+    }
+    this.contatoVM = this.formulario.value
+
+    this.contatoService.inserir(this.contatoVM).subscribe({
+      next: (contato: FormsContatoViewModel) => this.processarSucesso(contato),
+      error: (err: Error) => this.processarFalha(err),
+    });
+  }
+
+  processarSucesso(contato: FormsContatoViewModel) {
+    this.toastService.success(
+      `O contato "${contato.nome}" foi cadastrado com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/contatos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(erro.message, 'Error');
   }
 }

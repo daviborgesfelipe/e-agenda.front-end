@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ContatosService } from '../services/contatos.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-editar-contatos',
@@ -11,14 +12,15 @@ import { ContatosService } from '../services/contatos.service';
 })
 export class EditarContatosComponent {
   formulario!: FormGroup;
-  contatoVM!: FormsContatoViewModel;
+  contatoViewModel!: FormsContatoViewModel;
   idSelecionado: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private contatoService: ContatosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastService: ToastrService  
   ) {}
 
   get email() {
@@ -27,32 +29,53 @@ export class EditarContatosComponent {
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
-      nome: new FormControl(''),
-      email: new FormControl(''),
-      telefone: new FormControl(''),
-      cargo: new FormControl(''),
-      empresa: new FormControl(''),
+      nome: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.email, Validators.required]),
+      telefone: new FormControl('', [Validators.required]),
+      cargo: new FormControl('', [Validators.required]),
+      empresa: new FormControl('', [Validators.required]),
     });
 
     this.idSelecionado = this.route.snapshot.paramMap.get('id');
 
     if (!this.idSelecionado) return;
 
-    this.contatoService.selecionarPorId(this.idSelecionado).subscribe((res) => {
-      this.formulario.patchValue(res);
+    this.contatoService.selecionarPorId(this.idSelecionado)
+      .subscribe((_contato) => {
+        this.formulario.patchValue(_contato);
+      }
+    );
+  }
+
+  gravar(){
+    if(this.formulario.invalid){
+      this.toastService.warning(
+        'Verifique os campos do formulario',
+        'Aviso!'
+      )
+      this.formulario.markAllAsTouched();
+
+      return;
+    }
+    this.contatoViewModel = this.formulario.value
+
+    this.contatoService.editar(this.idSelecionado!, this.contatoViewModel).subscribe({
+      next: (contato: FormsContatoViewModel) => this.processarSucesso(contato),
+      error: (err: Error) => this.processarFalha(err),
     });
   }
 
-  gravar() {
-    this.contatoVM = this.formulario.value;
+  processarSucesso(contato: FormsContatoViewModel) {
+    this.toastService.success(
+      `O contato "${contato.nome}" foi editado com sucesso!`,
+      'Sucesso'
+    );
 
-    this.contatoService
-      .editar(this.idSelecionado!, this.contatoVM)
-      .subscribe((res) => {
-        console.log(res);
+    this.router.navigate(['/contatos/listar']);
+  }
 
-        this.router.navigate(['/contatos/listar']);
-      });
+  processarFalha(erro: Error) {
+    this.toastService.error(erro.message, 'Error');
   }
 
   campoEstaInvalido(nome: string) {

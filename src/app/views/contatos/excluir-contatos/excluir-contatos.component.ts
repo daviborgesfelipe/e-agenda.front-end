@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VisualizarContatoViewModel } from '../models/visualizar-cotato.view-model';
 import { ContatosService } from '../services/contatos.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 
 @Component({
   selector: 'app-excluir-contatos',
@@ -15,7 +17,8 @@ export class ExcluirContatosComponent {
   constructor(
     private contatoService: ContatosService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastService: ToastrService 
   ) {
     this.contatoVM = new VisualizarContatoViewModel('', '', '', '', '', '');
   }
@@ -33,8 +36,23 @@ export class ExcluirContatosComponent {
   }
 
   gravar() {
-    this.contatoService.excluir(this.idSelecionado!).subscribe((res) => {
-      this.router.navigate(['/contatos', 'listar']);
+    this.contatoService.excluir(this.idSelecionado!)
+    .subscribe({
+      next: () => this.processarSucesso(),
+      error: (err: Error) => this.processarFalha(err),
     });
+  }
+
+  processarSucesso() {
+    this.toastService.success(
+      `O contato foi excluido com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/contatos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(erro.message, 'Error');
   }
 }
