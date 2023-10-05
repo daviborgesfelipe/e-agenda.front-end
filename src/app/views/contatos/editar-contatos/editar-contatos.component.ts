@@ -10,7 +10,7 @@ import { ContatosService } from '../services/contatos.service';
   styleUrls: ['./editar-contatos.component.css']
 })
 export class EditarContatosComponent {
-  form!: FormGroup;
+  formulario!: FormGroup;
   contatoVM!: FormsContatoViewModel;
   idSelecionado: string | null = null;
 
@@ -21,8 +21,12 @@ export class EditarContatosComponent {
     private route: ActivatedRoute
   ) {}
 
+  get email() {
+    return this.formulario.get('email');
+  }
+
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.formulario = this.formBuilder.group({
       nome: new FormControl(''),
       email: new FormControl(''),
       telefone: new FormControl(''),
@@ -35,12 +39,12 @@ export class EditarContatosComponent {
     if (!this.idSelecionado) return;
 
     this.contatoService.selecionarPorId(this.idSelecionado).subscribe((res) => {
-      this.form.patchValue(res);
+      this.formulario.patchValue(res);
     });
   }
 
   gravar() {
-    this.contatoVM = this.form.value;
+    this.contatoVM = this.formulario.value;
 
     this.contatoService
       .editar(this.idSelecionado!, this.contatoVM)
@@ -49,5 +53,9 @@ export class EditarContatosComponent {
 
         this.router.navigate(['/contatos/listar']);
       });
+  }
+
+  campoEstaInvalido(nome: string) {
+    return this.formulario.get(nome)!.touched && this.formulario.get(nome)!.invalid;
   }
 }

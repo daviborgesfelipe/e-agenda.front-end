@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@a
 import { ContatosService } from '../services/contatos.service';
 import { Router } from '@angular/router';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inserir-contatos',
@@ -17,7 +18,8 @@ export class InserirContatosComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private contatoService: ContatosService,
-    private router: Router  
+    private router: Router,
+    private toastService: ToastrService  
   ){}
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class InserirContatosComponent implements OnInit{
     this.contatoVM = this.formulario.value
     this.contatoService.inserir(this.formulario.value).subscribe((res) => {
       this.contatoVM = this.formulario.value;
-      
+
       
       console.log(this.formulario.value)
       this.router.navigate(['/dashboard'])
