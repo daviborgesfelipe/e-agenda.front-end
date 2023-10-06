@@ -9,13 +9,15 @@ import { InserirContatosComponent } from './inserir-contatos/inserir-contatos.co
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
+import { CardContatoComponent } from './card-contato/card-contato.component';
 
 @NgModule({
   declarations: [
     InserirContatosComponent,
     ListarContatosComponent,
     EditarContatosComponent,
-    ExcluirContatosComponent
+    ExcluirContatosComponent,
+    CardContatoComponent
   ],
   imports: [
     CommonModule,
