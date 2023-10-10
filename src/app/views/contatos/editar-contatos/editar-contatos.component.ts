@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ContatosService } from '../services/contatos.service';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-contatos',
@@ -36,29 +37,29 @@ export class EditarContatosComponent {
       empresa: new FormControl('', [Validators.required]),
     });
 
-    this.idSelecionado = this.route.snapshot.paramMap.get('id');
-
-    if (!this.idSelecionado) return;
-
-    this.contatoService.selecionarPorId(this.idSelecionado)
-      .subscribe((_contato) => {
-        this.formulario.patchValue(_contato);
-      }
-    );
+    this.route.data.pipe(map((dados) => dados['contato'])).subscribe({
+      next: (contato) => this.obterContato(contato),
+      error: (erro) => this.processarFalha(erro),
+    });
   }
 
-  gravar(){
+  gravar() {
     if (this.formulario.invalid) {
       for (let erro of this.formulario.validate()) {
         this.toastService.warning(erro);
       }
       return;
     }
-    this.contatoViewModel = this.formulario.value
 
-    this.contatoService.editar(this.idSelecionado!, this.contatoViewModel).subscribe({
-      next: (contato: FormsContatoViewModel) => this.processarSucesso(contato),
-      error: (err: Error) => this.processarFalha(err),
+    this.contatoViewModel = this.formulario.value;
+
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (!id) return;
+
+    this.contatoService.editar(id, this.contatoViewModel).subscribe({
+      next: (contato) => this.processarSucesso(contato),
+      error: (erro) => this.processarFalha(erro),
     });
   }
 
@@ -77,5 +78,10 @@ export class EditarContatosComponent {
 
   campoEstaInvalido(nome: string) {
     return this.formulario.get(nome)!.touched && this.formulario.get(nome)!.invalid;
+  }
+
+  obterContato(contato: FormsContatoViewModel) {
+    this.contatoViewModel = contato;
+    this.formulario.patchValue(this.contatoViewModel);
   }
 }
