@@ -43,11 +43,9 @@ export class InserirContatosComponent implements OnInit{
 
   gravar(){
     if(this.formulario.invalid){
-      this.toastService.warning(
-        'Verifique os campos do formulario',
-        'Aviso!'
-      )
-      this.formulario.markAllAsTouched();
+      for (let erro of this.formulario.validate()) {
+        this.toastService.warning(erro);
+      }
 
       return;
     }
