@@ -48,13 +48,10 @@ export class EditarContatosComponent {
   }
 
   gravar(){
-    if(this.formulario.invalid){
-      this.toastService.warning(
-        'Verifique os campos do formulario',
-        'Aviso!'
-      )
-      this.formulario.markAllAsTouched();
-
+    if (this.formulario.invalid) {
+      for (let erro of this.formulario.validate()) {
+        this.toastService.warning(erro);
+      }
       return;
     }
     this.contatoViewModel = this.formulario.value

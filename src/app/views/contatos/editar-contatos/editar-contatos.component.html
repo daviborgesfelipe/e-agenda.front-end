@@ -32,18 +32,6 @@
             placeholder="Digite o email do contato"
           />
 
-          <div *ngIf="campoEstaInvalido('email')" class="invalid-tooltip">
-
-            <span *ngIf="email?.errors?.['required']">
-              O email precisa ser preenchido.
-            </span>
-
-            <span *ngIf="email?.errors?.['email']">
-              O valor precisa ter um formato de email.
-            </span>
-
-          </div>
-
         </div>
 
         <div class="form-group mb-3 position-relative">
@@ -57,10 +45,6 @@
             type="text"
             placeholder="Digite o telefone do contato"
           />
-
-          <div *ngIf="campoEstaInvalido('telefone')" class="invalid-tooltip">
-            <span>O telefone precisa ser preenchido.</span>
-          </div>
 
         </div>
 
@@ -77,10 +61,6 @@
             placeholder="Digite o cargo do contato"
           />
 
-          <div *ngIf="campoEstaInvalido('cargo')" class="invalid-tooltip">
-            <span>O cargo precisa ser preenchido.</span>
-          </div>
-
         </div>
 
         <div class="form-group mb-3 position-relative">
@@ -94,10 +74,6 @@
             type="text"
             placeholder="Digite a empresa do contato"
           />
-
-          <div *ngIf="campoEstaInvalido('empresa')" class="invalid-tooltip">
-            <span>A empresa precisa ser preenchida.</span>
-          </div>
 
         </div>
 
