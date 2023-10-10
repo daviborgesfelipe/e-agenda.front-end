@@ -4,6 +4,7 @@ import { VisualizarContatoViewModel } from '../models/visualizar-cotato.view-mod
 import { ContatosService } from '../services/contatos.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-excluir-contatos',
@@ -24,22 +25,16 @@ export class ExcluirContatosComponent {
   }
 
   ngOnInit(): void {
-    this.idSelecionado = this.route.snapshot.paramMap.get('id');
-
-    if (!this.idSelecionado) return;
-
-    this.contatoService
-      .selecionarContatoCompletoPorId(this.idSelecionado)
-      .subscribe((res) => {
-        this.contatoVM = res;
-      });
+    this.route.data.pipe(map((dados) => dados['contato'])).subscribe({
+      next: (contato) => this.obterContato(contato),
+      error: (erro) => this.processarFalha(erro),
+    });
   }
 
   gravar() {
-    this.contatoService.excluir(this.idSelecionado!)
-    .subscribe({
+    this.contatoService.excluir(this.contatoVM.id).subscribe({
       next: () => this.processarSucesso(),
-      error: (err: Error) => this.processarFalha(err),
+      error: (erro) => this.processarFalha(erro),
     });
   }
 
@@ -54,5 +49,9 @@ export class ExcluirContatosComponent {
 
   processarFalha(erro: Error) {
     this.toastService.error(erro.message, 'Error');
+  }
+
+  obterContato(contato: VisualizarContatoViewModel) {
+    this.contatoVM = contato;
   }
 }

@@ -7,9 +7,19 @@ import { EditarContatosComponent } from './views/contatos/editar-contatos/editar
 import { ExcluirContatosComponent } from './views/contatos/excluir-contatos/excluir-contatos.component';
 import { FormsContatoViewModel } from './views/contatos/models/forms-contato.view-model';
 import { ContatosService } from './views/contatos/services/contatos.service';
+import { VisualizarContatoViewModel } from './views/contatos/models/visualizar-cotato.view-model';
+import { ListarContatoViewModel } from './views/contatos/models/listar-contato.view-model';
 
 const formsContatoResolver: ResolveFn<FormsContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
   return inject(ContatosService).selecionarPorId(route.paramMap.get('id')!)
+}
+
+const visualzarContatoResolver: ResolveFn<VisualizarContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
+  return inject(ContatosService).selecionarContatoCompletoPorId(route.paramMap.get('id')!)
+}
+
+const listarContatoResolver: ResolveFn<ListarContatoViewModel[]> = () => {
+  return inject(ContatosService).selecionarTodos()
 }
 
 const routes: Routes = [
@@ -29,7 +39,10 @@ const routes: Routes = [
  },
  {
   path: 'contatos/listar', 
-  component: ListarContatosComponent
+  component: ListarContatosComponent,
+  resolve: {
+    contatos: listarContatoResolver
+  }
  },
  {
   path: 'contatos/editar/:id', 
@@ -40,7 +53,10 @@ const routes: Routes = [
  },
  {
   path: 'contatos/excluir/:id', 
-  component: ExcluirContatosComponent
+  component: ExcluirContatosComponent,
+  resolve:{
+    contato: visualzarContatoResolver
+  }
  }
 ];
 
