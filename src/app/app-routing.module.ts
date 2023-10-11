@@ -9,6 +9,7 @@ import { FormsContatoViewModel } from './views/contatos/models/forms-contato.vie
 import { ContatosService } from './views/contatos/services/contatos.service';
 import { VisualizarContatoViewModel } from './views/contatos/models/visualizar-cotato.view-model';
 import { ListarContatoViewModel } from './views/contatos/models/listar-contato.view-model';
+import { InserirCompromissosComponent } from './views/compromissos/inserir-compromissos/inserir-compromissos.component';
 
 const formsContatoResolver: ResolveFn<FormsContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
   return inject(ContatosService).selecionarPorId(route.paramMap.get('id')!)
@@ -57,7 +58,12 @@ const routes: Routes = [
   resolve:{
     contato: visualzarContatoResolver
   }
- }
+ },
+ //Compromissos
+ {
+  path: 'compromissos/inserir', 
+  component: InserirCompromissosComponent
+ },
 ];
 
 @NgModule({

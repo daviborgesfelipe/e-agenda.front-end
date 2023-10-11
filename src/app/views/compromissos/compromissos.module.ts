@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { ContatosService } from '../contatos/services/contatos.service';
 import { InserirCompromissosComponent } from './inserir-compromissos/inserir-compromissos.component';
+import { CompromissoService } from './services/compromisso.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { InserirCompromissosComponent } from './inserir-compromissos/inserir-com
     NgbModule
   ],
   providers: [
-    ContatosService
+    ContatosService,
+    CompromissoService
   ]
 })
 export class CompromissosModule { }

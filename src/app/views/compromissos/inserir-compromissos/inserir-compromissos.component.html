@@ -5,7 +5,7 @@
         <h1 class="fw-bold text-primary">Inserir Novo Compromisso</h1>
       </div>
 
-      <form class="mt-4">
+      <form class="mt-4" [formGroup]="formulario!" (ngSubmit)="gravar()">
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Assunto:</label>
           <input
@@ -19,10 +19,10 @@
           <label class="form-label">Tipo de Compromisso:</label>
 
           <div class="d-flex align-items-center gap-2">
-            <input name="tipoLocal" type="radio" [value]="0" />
+            <input name="tipoLocal" formControlName="tipoLocal" type="radio" [value]="0" />
             Remoto
 
-            <input name="tipoLocal" type="radio" [value]="1" />
+            <input name="tipoLocal" formControlName="tipoLocal" type="radio" [value]="1" />
             Presencial
           </div>
         </div>
@@ -30,6 +30,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Link:</label>
           <input
+            formControlName="link"
             class="form-control"
             type="text"
             placeholder="Digite o link do compromisso"
@@ -39,6 +40,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Local:</label>
           <input
+            formControlName="local"
             class="form-control"
             type="text"
             placeholder="Digite o local do compromisso"
@@ -47,13 +49,14 @@
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Data:</label>
-          <input class="form-control" type="date" />
+          <input class="form-control" type="date" formControlName="data" />
         </div>
 
         <div class="form-group mb-3 position-relative row">
           <div class="col-6">
-            <label class="form-label">Hora de Início:</label>
-            <input
+            <label class="form-label" >Hora de Início:</label>
+            <input 
+              formControlName="horaInicio"
               class="form-control"
               type="time"
               placeholder="Digite o telefone do contato"
@@ -63,6 +66,7 @@
           <div class="col">
             <label class="form-label">Hora de Término:</label>
             <input
+              formControlName="horaTermino"
               class="form-control"
               type="time"
               placeholder="Digite o telefone do contato"
@@ -72,15 +76,23 @@
 
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Contato:</label>
-          <select class="form-select w-50" name="categoriaId" id="">
-            <option>Nome do Contato</option>
+          <select 
+            class="form-select w-50" 
+            name="contatoId" 
+            id="" 
+            formControlName="contatoId">
+            <option 
+             *ngFor="let contato of contatos" 
+             [ngValue]="contato.id">
+              {{contato.nome}}
+            </option>
           </select>
         </div>
 
         <div class="card-footer g-grid d-flex gap-1 mt-5">
           <button
             data-cy="btnGravar"
-            type="button"
+            type="submit"
             class="btn btn-primary px-5"
           >
             <i class="bi bi-save me-2"></i>
