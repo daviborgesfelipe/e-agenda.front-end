@@ -21,6 +21,13 @@ export class DespesasService {
       .pipe(map((res) => res.dados));
   }
 
+  public excluir(id: string): Observable<any> {
+    return this.http.delete<any>(
+      this.endpoint + id,
+      this.obterHeadersAutorizacao()
+    );
+  }
+
   public editar(
     id: string,
     despesa: FormsDespesaViewModel
@@ -39,6 +46,17 @@ export class DespesasService {
   public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
     return this.http
       .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarDespesaCompletaPorId(
+    id: string
+  ): Observable<VisualizarDespesaViewModel> {
+    return this.http
+      .get<any>(
+        this.endpoint + 'visualizacao-completa/' + id,
+        this.obterHeadersAutorizacao()
+      )
       .pipe(map((res) => res.dados));
   }
 
