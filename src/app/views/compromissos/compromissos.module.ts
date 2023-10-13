@@ -7,10 +7,14 @@ import { RouterModule } from '@angular/router';
 import { ContatosService } from '../contatos/services/contatos.service';
 import { InserirCompromissosComponent } from './inserir-compromissos/inserir-compromissos.component';
 import { CompromissoService } from './services/compromisso.service';
+import { ListarCompromissosComponent } from './listar-compromissos/listar-compromissos.component';
+import { EditarCompromissosComponent } from './editar-compromissos/editar-compromissos.component';
 
 @NgModule({
   declarations: [
-    InserirCompromissosComponent
+    InserirCompromissosComponent,
+    ListarCompromissosComponent,
+    EditarCompromissosComponent,
   ],
   imports: [
     CommonModule,

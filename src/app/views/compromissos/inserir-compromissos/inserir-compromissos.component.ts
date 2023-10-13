@@ -53,7 +53,7 @@ export class InserirCompromissosComponent implements OnInit{
     }
     this.compromissoService.inserir(this.formulario?.value).subscribe((res) => {
       this.toastService.success(
-        `O compromisso "${res.assuto}" foi salvo com sucesso!`,
+        `O compromisso "${res.assunto}" foi salvo com sucesso!`,
         `Sucesso`
       );
     })

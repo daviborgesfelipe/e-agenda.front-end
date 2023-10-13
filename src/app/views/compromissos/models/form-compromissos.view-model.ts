@@ -1,5 +1,5 @@
 export type FormsCompromissosViewModel = {
-  assuto: string;
+  assunto: string;
   tipoLocal: TipoLocalCompromissoEnum;
   link: string;
   local: string;

@@ -10,6 +10,10 @@ import { ContatosService } from './views/contatos/services/contatos.service';
 import { VisualizarContatoViewModel } from './views/contatos/models/visualizar-cotato.view-model';
 import { ListarContatoViewModel } from './views/contatos/models/listar-contato.view-model';
 import { InserirCompromissosComponent } from './views/compromissos/inserir-compromissos/inserir-compromissos.component';
+import { ListarCompromissosComponent } from './views/compromissos/listar-compromissos/listar-compromissos.component';
+import { EditarCompromissosComponent } from './views/compromissos/editar-compromissos/editar-compromissos.component';
+import { FormsCompromissosViewModel } from './views/compromissos/models/form-compromissos.view-model';
+import { CompromissoService } from './views/compromissos/services/compromisso.service';
 
 const formsContatoResolver: ResolveFn<FormsContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
   return inject(ContatosService).selecionarPorId(route.paramMap.get('id')!)
@@ -21,6 +25,10 @@ const visualzarContatoResolver: ResolveFn<VisualizarContatoViewModel> = (route: 
 
 const listarContatoResolver: ResolveFn<ListarContatoViewModel[]> = () => {
   return inject(ContatosService).selecionarTodos()
+}
+
+const visualizarCompromissoResolver: ResolveFn<FormsCompromissosViewModel> = (route: ActivatedRouteSnapshot) =>{
+  return inject(CompromissoService).selecionarPorId(route.paramMap.get('id')!)
 }
 
 const routes: Routes = [
@@ -63,6 +71,17 @@ const routes: Routes = [
  {
   path: 'compromissos/inserir', 
   component: InserirCompromissosComponent
+ },
+ {
+  path: 'compromissos/listar', 
+  component: ListarCompromissosComponent
+ },
+ {
+  path: 'compromissos/editar/:id', 
+  component: EditarCompromissosComponent,
+  resolve: {
+    compromissos: visualizarCompromissoResolver
+  }
  },
 ];
 
