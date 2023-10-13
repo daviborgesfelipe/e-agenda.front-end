@@ -21,6 +21,12 @@ export class DespesasService {
       .pipe(map((res) => res.dados));
   }
 
+  public selecionarTodos(): Observable<ListarDespesaViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
   private obterHeadersAutorizacao() {
     const token = environment.apiKey;
 

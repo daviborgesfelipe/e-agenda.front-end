@@ -4,7 +4,11 @@ import { InserirDespesasComponent } from './inserir-despesas/inserir-despesas.co
 import { DespesasService } from './services/despesa.service';
 import { ListarCategoriaViewModel } from '../categorias/models/listar-categoria.view-model';
 import { CategoriasService } from '../categorias/services/categoria.service';
+import { ListarDespesasComponent } from './listar-despesas/listar-despesas.component';
 
+const listarDespesasResolver = () => {
+  return inject(DespesasService).selecionarTodos();
+};
 
 const routes: Routes = [
   {
@@ -16,6 +20,11 @@ const routes: Routes = [
     path: 'inserir',
     component: InserirDespesasComponent,
   },
+  {
+    path: 'listar',
+    component: ListarDespesasComponent,
+    resolve: { despesas: listarDespesasResolver },
+  }
 ];
 
 @NgModule({
