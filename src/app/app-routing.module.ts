@@ -28,19 +28,24 @@ const routes: Routes = [
   },
 
  //Compromissos
- 
  {
   path: 'compromissos',
   loadChildren: () =>
     import('./views/compromissos/compromissos.module').then((m) => m.CompromissosModule),
   },
 
-   //Categorias
- 
+  //Categorias
  {
   path: 'categorias',
   loadChildren: () =>
     import('./views/categorias/categorias.module').then((m) => m.CategoriasModule),
+  },
+
+  //Despesas
+ {
+  path: 'despesas',
+  loadChildren: () =>
+    import('./views/despesas/despesas.module').then((m) => m.DespesasModule),
   },
 ];
 
