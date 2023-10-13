@@ -15,19 +15,7 @@ import { EditarCompromissosComponent } from './views/compromissos/editar-comprom
 import { FormsCompromissosViewModel } from './views/compromissos/models/form-compromissos.view-model';
 import { CompromissoService } from './views/compromissos/services/compromisso.service';
 
-const formsContatoResolver: ResolveFn<FormsContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
-  return inject(ContatosService).selecionarPorId(route.paramMap.get('id')!)
-}
-
-const visualzarContatoResolver: ResolveFn<VisualizarContatoViewModel> = (route: ActivatedRouteSnapshot) =>{
-  return inject(ContatosService).selecionarContatoCompletoPorId(route.paramMap.get('id')!)
-}
-
-const listarContatoResolver: ResolveFn<ListarContatoViewModel[]> = () => {
-  return inject(ContatosService).selecionarTodos()
-}
-
-const visualizarCompromissoResolver: ResolveFn<FormsCompromissosViewModel> = (route: ActivatedRouteSnapshot) =>{
+const formsCompromissoResolver: ResolveFn<FormsCompromissosViewModel> = (route: ActivatedRouteSnapshot) =>{
   return inject(CompromissoService).selecionarPorId(route.paramMap.get('id')!)
 }
 
@@ -41,48 +29,22 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
+
 //Contatos
- {
-  path: 'contatos/inserir', 
-  component: InserirContatosComponent
- },
- {
-  path: 'contatos/listar', 
-  component: ListarContatosComponent,
-  resolve: {
-    contatos: listarContatoResolver
-  }
- },
- {
-  path: 'contatos/editar/:id', 
-  component: EditarContatosComponent,
-  resolve: {
-    contato: formsContatoResolver
-  }
- },
- {
-  path: 'contatos/excluir/:id', 
-  component: ExcluirContatosComponent,
-  resolve:{
-    contato: visualzarContatoResolver
-  }
- },
+
+  {
+    path: 'contatos',
+    loadChildren: () =>
+      import('./views/contatos/contatos.module').then((m) => m.ContatosModule),
+  },
+
  //Compromissos
+ 
  {
-  path: 'compromissos/inserir', 
-  component: InserirCompromissosComponent
- },
- {
-  path: 'compromissos/listar', 
-  component: ListarCompromissosComponent
- },
- {
-  path: 'compromissos/editar/:id', 
-  component: EditarCompromissosComponent,
-  resolve: {
-    compromissos: visualizarCompromissoResolver
-  }
- },
+  path: 'compromissos',
+  loadChildren: () =>
+    import('./views/compromissos/compromissos.module').then((m) => m.CompromissosModule),
+  },
 ];
 
 @NgModule({

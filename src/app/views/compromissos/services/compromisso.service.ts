@@ -4,6 +4,7 @@ import { FormsCompromissosViewModel } from '../models/form-compromissos.view-mod
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
+import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 
 @Injectable()
 export class CompromissoService {
@@ -49,6 +50,21 @@ export class CompromissoService {
           return this.processarErroHttp(err)
         })
       );
+  }
+
+  public excluir(id: string): Observable<any> {
+    return this.http.delete(this.endpoints + id, this.obterAutorizacao());
+  }
+
+  public selecionarCompromissoCompletoPorId(
+    id: string
+  ): Observable<VisualizarCompromissoViewModel> {
+    return this.http
+      .get<any>(
+        this.endpoints + 'visualizacao-completa/' + id,
+        this.obterAutorizacao()
+      )
+      .pipe(map((res) => res.dados));
   }
 
   public obterAutorizacao(){

@@ -10,17 +10,24 @@ import { CompromissoService } from './services/compromisso.service';
 import { ListarCompromissosComponent } from './listar-compromissos/listar-compromissos.component';
 import { EditarCompromissosComponent } from './editar-compromissos/editar-compromissos.component';
 
+import { CompromissosRoutingModule } from './compromissos-routing.module';
+import { ContatosModule } from '../contatos/contatos.module';
+import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-compromissos.component';
+
 @NgModule({
   declarations: [
     InserirCompromissosComponent,
     ListarCompromissosComponent,
     EditarCompromissosComponent,
+    ExcluirCompromissosComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    CompromissosRoutingModule,
+    ContatosModule
   ],
   providers: [
     ContatosService,
