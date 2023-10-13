@@ -21,9 +21,24 @@ export class DespesasService {
       .pipe(map((res) => res.dados));
   }
 
+  public editar(
+    id: string,
+    despesa: FormsDespesaViewModel
+  ): Observable<FormsDespesaViewModel> {
+    return this.http
+      .put<any>(this.endpoint + id, despesa, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
   public selecionarTodos(): Observable<ListarDespesaViewModel[]> {
     return this.http
       .get<any>(this.endpoint, this.obterHeadersAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
+    return this.http
+      .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
       .pipe(map((res) => res.dados));
   }
 
