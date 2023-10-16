@@ -19,50 +19,50 @@
           Novo Compromisso
         </a>
       </div>
-
+      
       <!-- Listagem de Registros -->
-      <div class="mt-3">
-        <table
-          class="table table-light table-striped table-hover table-borderless"
-        >
-          <thead class="thead-dark text-center">
-            <tr>
-              <th>Assunto</th>
-              <th>Data</th>
-              <th>Hora de Início</th>
-              <th>Hora de Término</th>
-              <th>Contato</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody class="text-center">
-            <tr *ngFor="let compromisso of compromissos">
-              <td>{{ compromisso.assunto }}</td>
-              <td>{{ compromisso.data }}</td>
-              <td>{{ compromisso.horaInicio }}</td>
-              <td>{{ compromisso.horaTermino }}</td>
-              <td>{{ compromisso.nomeContato }}</td>
+      <div class="row mt-3 g-3 justify-items-sm-center">
 
-              <td class="d-grid d-md-block">
-                <button
-                  routerLink="/compromissos/editar/{{ compromisso.id }}"
-                  type="button"
-                  class="btn btn-sm btn-primary me-0 me-md-1 mb-1 mb-md-auto"
-                >
-                  <i class="bi bi-pencil"></i>
-                </button>
-                <button
-                  routerLink="/compromissos/excluir/{{ compromisso.id }}"
-                  type="button"
-                  class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto"
-                >
-                  <i class="bi bi-trash"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngFor="let compromisso of compromissos" class="col-12 col-md-6 col-lg-4">
+          <div class="card h-100 border-dark">
+            <div class="card-body d-flex flex-column gap-1">
+              <div class="d-flex flex-column">
+                <h5 class="card-title mb-1 text-primary">{{compromisso.assunto}}</h5>
+                <span class="card-text text-muted fw-semibold">Data: {{compromisso.data | date}}</span>
+              </div>
+              <span class="card-text text-muted fw-semibold"
+                >Inicio: {{compromisso.horaInicio }}</span
+              >
+              <span class="card-text text-muted fw-semibold">Término: {{compromisso.horaTermino }}</span>
+            </div>
+
+            <div
+              class="d-flex gap-1 justify-content-end card-footer bg-transparent"
+            >
+              <button
+                class="btn btn-outline-dark rounded-5 py-2"
+                routerLink="/tarefas/editar/{{compromisso.id}}"
+                aria-label="Editar"
+                ngbTooltip="Editar"
+                placement="bottom"
+              >
+                <i class="bi bi-pen"></i>
+              </button>
+              <button
+                class="btn btn-outline-dark rounded-5 py-2"
+                routerLink="/tarefas/excluir/{{compromisso.id}}"
+                aria-label="Excluir"
+                ngbTooltip="Excluir"
+                placement="bottom"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
+      
     </div>
   </div>
 </div>
