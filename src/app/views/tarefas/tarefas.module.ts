@@ -9,12 +9,14 @@ import { TarefasService } from './services/tarefas.service';
 import { RouterModule } from '@angular/router';
 import { TarefasRoutingModule } from './tarefas-routing.module';
 import { ListarTarefasComponent } from './listar-tarefas/listar-tarefas.component';
+import { EditarTarefasComponent } from './editar-tarefas/editar-tarefas.component';
 
 
 @NgModule({
   declarations: [
     InserirTarefasComponent,
-    ListarTarefasComponent
+    ListarTarefasComponent,
+    EditarTarefasComponent
   ],
   imports: [
     CommonModule,

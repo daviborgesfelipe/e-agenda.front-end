@@ -81,6 +81,7 @@ export class InserirTarefasComponent implements OnInit{
       );
 
       console.log(res);
+      this.router.navigate(['tarefas', 'listar'])
     });
   }
 }

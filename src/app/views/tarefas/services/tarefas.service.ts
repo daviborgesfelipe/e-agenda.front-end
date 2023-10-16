@@ -20,7 +20,28 @@ export class TarefasService {
       .pipe(map((res) => res.dados));
   }
 
+  public editar(
+    id: string,
+    tarefa: FormsTarefaViewModel
+  ): Observable<FormsTarefaViewModel> {
+    return this.http
+      .put<any>(this.endpoint + id, tarefa, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
   public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarPorId(id: string): Observable<FormsTarefaViewModel> {
+    return this.http
+      .get<any>(this.endpoint + id, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarTodosCompleto(): Observable<ListarTarefaViewModel[]> {
     return this.http
       .get<any>(this.endpoint, this.obterAutorizacao())
       .pipe(map((res) => res.dados));

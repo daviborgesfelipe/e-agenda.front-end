@@ -1,11 +1,24 @@
-import { RouterModule, Routes } from "@angular/router";
-import { InserirTarefasComponent } from "./inserir-tarefas/inserir-tarefas.component";
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from "@angular/router";
 import { NgModule, inject } from "@angular/core";
+
 import { ListarTarefasComponent } from "./listar-tarefas/listar-tarefas.component";
+import { InserirTarefasComponent } from "./inserir-tarefas/inserir-tarefas.component";
 import { TarefasService } from "./services/tarefas.service";
+import { ContatosService } from "../contatos/services/contatos.service";
+import { VisualizarTarefasViewModel } from "./models/visualizar-tarefa.voew-model";
+import { EditarTarefasComponent } from "./editar-tarefas/editar-tarefas.component";
+import { FormGroup } from "@angular/forms";
 
 const listarTarefasResolver = () => {
   return inject(TarefasService).selecionarTodos();
+};
+
+const visualizarContatoResolver: ResolveFn<VisualizarTarefasViewModel> = (
+  route: ActivatedRouteSnapshot
+) => {
+  return inject(TarefasService).selecionarPorId(
+    route.paramMap.get('id')!
+  );
 };
 
 const routes: Routes = [
@@ -22,6 +35,11 @@ const routes: Routes = [
     path: 'listar',
     component: ListarTarefasComponent,
     resolve: { tarefas: listarTarefasResolver },
+  },
+  {
+    path: 'editar/:id',
+    component: EditarTarefasComponent,
+    resolve: { tarefa: visualizarContatoResolver },
   }
 ]
 
