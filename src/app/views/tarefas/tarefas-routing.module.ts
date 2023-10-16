@@ -5,21 +5,24 @@ import { ListarTarefasComponent } from "./listar-tarefas/listar-tarefas.componen
 import { InserirTarefasComponent } from "./inserir-tarefas/inserir-tarefas.component";
 import { TarefasService } from "./services/tarefas.service";
 import { ContatosService } from "../contatos/services/contatos.service";
-import { VisualizarTarefasViewModel } from "./models/visualizar-tarefa.voew-model";
+import { VisualizarTarefasViewModel } from "./models/visualizar-tarefa.view-model";
 import { EditarTarefasComponent } from "./editar-tarefas/editar-tarefas.component";
 import { FormGroup } from "@angular/forms";
+import { ExcluirTarefasComponent } from "./excluir-tarefas/excluir-tarefas.component";
 
 const listarTarefasResolver = () => {
   return inject(TarefasService).selecionarTodos();
 };
 
-const visualizarContatoResolver: ResolveFn<VisualizarTarefasViewModel> = (
-  route: ActivatedRouteSnapshot
-) => {
-  return inject(TarefasService).selecionarPorId(
+const formsTarefaResolver = (route: ActivatedRouteSnapshot) => {
+  return inject(TarefasService).selecionarPorId(route.paramMap.get('id')!);
+};
+
+const visualizarTarefaResolver = (route: ActivatedRouteSnapshot) => {
+  return inject(TarefasService).selecionarTarefaCompletaPorId(
     route.paramMap.get('id')!
   );
-};
+}
 
 const routes: Routes = [
   {
@@ -39,7 +42,12 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: EditarTarefasComponent,
-    resolve: { tarefa: visualizarContatoResolver },
+    resolve: { tarefa: formsTarefaResolver },
+  },
+  {
+    path: 'excluir/:id',
+    component: ExcluirTarefasComponent,
+    resolve: { tarefa: visualizarTarefaResolver },
   }
 ]
 

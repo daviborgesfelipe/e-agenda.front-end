@@ -5,6 +5,7 @@ import { Observable, map } from "rxjs";
 import { Form } from "@angular/forms";
 import { environment } from "src/environments/environment";
 import { ListarTarefaViewModel } from "../models/listar-tarefas.view-models";
+import { VisualizarTarefasViewModel } from "../models/visualizar-tarefa.view-model";
 
 @Injectable()
 
@@ -29,6 +30,13 @@ export class TarefasService {
       .pipe(map((res) => res.dados));
   }
 
+  public excluir(id: string): Observable<any> {
+    return this.http.delete<any>(
+      this.endpoint + id,
+      this.obterAutorizacao()
+    );
+  }
+
   public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
     return this.http
       .get<any>(this.endpoint, this.obterAutorizacao())
@@ -41,9 +49,14 @@ export class TarefasService {
       .pipe(map((res) => res.dados));
   }
 
-  public selecionarTodosCompleto(): Observable<ListarTarefaViewModel[]> {
+  public selecionarTarefaCompletaPorId(
+    id: string
+  ): Observable<VisualizarTarefasViewModel> {
     return this.http
-      .get<any>(this.endpoint, this.obterAutorizacao())
+      .get<any>(
+        this.endpoint + 'visualizacao-completa/' + id,
+        this.obterAutorizacao()
+      )
       .pipe(map((res) => res.dados));
   }
 

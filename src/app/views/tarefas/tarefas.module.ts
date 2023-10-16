@@ -10,13 +10,15 @@ import { RouterModule } from '@angular/router';
 import { TarefasRoutingModule } from './tarefas-routing.module';
 import { ListarTarefasComponent } from './listar-tarefas/listar-tarefas.component';
 import { EditarTarefasComponent } from './editar-tarefas/editar-tarefas.component';
+import { ExcluirTarefasComponent } from './excluir-tarefas/excluir-tarefas.component';
 
 
 @NgModule({
   declarations: [
     InserirTarefasComponent,
     ListarTarefasComponent,
-    EditarTarefasComponent
+    EditarTarefasComponent,
+    ExcluirTarefasComponent
   ],
   imports: [
     CommonModule,

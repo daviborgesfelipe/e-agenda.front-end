@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TarefasService } from '../services/tarefas.service';
 import { ItemTarefaViewModel } from '../models/item-tarefa.view-model';
 import { StatusItemTarefa } from '../models/status-tarefa.enum';
-import { VisualizarTarefasViewModel } from '../models/visualizar-tarefa.voew-model';
+import { VisualizarTarefasViewModel } from '../models/visualizar-tarefa.view-model';
 
 @Component({
   selector: 'app-editar-tarefas',

@@ -14,7 +14,7 @@ import { CompromissosModule } from './views/compromissos/compromissos.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
