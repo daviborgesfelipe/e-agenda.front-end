@@ -8,11 +8,13 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TarefasService } from './services/tarefas.service';
 import { RouterModule } from '@angular/router';
 import { TarefasRoutingModule } from './tarefas-routing.module';
+import { ListarTarefasComponent } from './listar-tarefas/listar-tarefas.component';
 
 
 @NgModule({
   declarations: [
-    InserirTarefasComponent
+    InserirTarefasComponent,
+    ListarTarefasComponent
   ],
   imports: [
     CommonModule,

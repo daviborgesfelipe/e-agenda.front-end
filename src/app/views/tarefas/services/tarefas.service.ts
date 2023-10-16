@@ -4,6 +4,7 @@ import { FormsTarefaViewModel } from "../models/forms-tarefas.view-models";
 import { Observable, map } from "rxjs";
 import { Form } from "@angular/forms";
 import { environment } from "src/environments/environment";
+import { ListarTarefaViewModel } from "../models/listar-tarefas.view-models";
 
 @Injectable()
 
@@ -16,6 +17,12 @@ export class TarefasService {
   public inserir(tarefa: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
     return this.http
       .post<any>(this.endpoint, tarefa, this.obterAutorizacao())
+      .pipe(map((res) => res.dados));
+  }
+
+  public selecionarTodos(): Observable<ListarTarefaViewModel[]> {
+    return this.http
+      .get<any>(this.endpoint, this.obterAutorizacao())
       .pipe(map((res) => res.dados));
   }
 

@@ -1,6 +1,12 @@
 import { RouterModule, Routes } from "@angular/router";
 import { InserirTarefasComponent } from "./inserir-tarefas/inserir-tarefas.component";
-import { NgModule } from "@angular/core";
+import { NgModule, inject } from "@angular/core";
+import { ListarTarefasComponent } from "./listar-tarefas/listar-tarefas.component";
+import { TarefasService } from "./services/tarefas.service";
+
+const listarTarefasResolver = () => {
+  return inject(TarefasService).selecionarTodos();
+};
 
 const routes: Routes = [
   {
@@ -11,6 +17,11 @@ const routes: Routes = [
   {
     path: 'inserir',
     component: InserirTarefasComponent,
+  },
+  {
+    path: 'listar',
+    component: ListarTarefasComponent,
+    resolve: { tarefas: listarTarefasResolver },
   }
 ]
 
