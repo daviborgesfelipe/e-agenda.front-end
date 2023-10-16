@@ -29,9 +29,7 @@ import { CompromissosModule } from './views/compromissos/compromissos.module';
     HttpClientModule,
     
     CoreModule,
-    DashboardModule,
-    // ContatosModule,
-    // CompromissosModule
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

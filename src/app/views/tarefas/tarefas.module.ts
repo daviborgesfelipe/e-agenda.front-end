@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { InserirTarefasComponent } from './inserir-tarefas/inserir-tarefas.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DespesasRoutingModule } from '../despesas/despesas-routing.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TarefasService } from './services/tarefas.service';
+import { RouterModule } from '@angular/router';
+import { TarefasRoutingModule } from './tarefas-routing.module';
+
+
+@NgModule({
+  declarations: [
+    InserirTarefasComponent
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TarefasRoutingModule,
+    NgSelectModule, 
+    NgbTooltipModule,
+    RouterModule
+  ],
+  providers: [
+    TarefasService
+  ]
+})
+export class TarefasModule { }
