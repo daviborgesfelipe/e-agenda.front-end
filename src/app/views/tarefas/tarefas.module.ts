@@ -11,6 +11,7 @@ import { TarefasRoutingModule } from './tarefas-routing.module';
 import { ListarTarefasComponent } from './listar-tarefas/listar-tarefas.component';
 import { EditarTarefasComponent } from './editar-tarefas/editar-tarefas.component';
 import { ExcluirTarefasComponent } from './excluir-tarefas/excluir-tarefas.component';
+import { CardTarefaComponent } from './card-tarefa/card-tarefa.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ExcluirTarefasComponent } from './excluir-tarefas/excluir-tarefas.compo
     InserirTarefasComponent,
     ListarTarefasComponent,
     EditarTarefasComponent,
-    ExcluirTarefasComponent
+    ExcluirTarefasComponent,
+    CardTarefaComponent
   ],
   imports: [
     CommonModule,

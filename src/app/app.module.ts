@@ -9,8 +9,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
-import { ContatosModule } from './views/contatos/contatos.module';
-import { CompromissosModule } from './views/compromissos/compromissos.module';
 
 @NgModule({
   declarations: [

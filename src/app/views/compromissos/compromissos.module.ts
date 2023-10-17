@@ -13,6 +13,7 @@ import { EditarCompromissosComponent } from './editar-compromissos/editar-compro
 import { CompromissosRoutingModule } from './compromissos-routing.module';
 import { ContatosModule } from '../contatos/contatos.module';
 import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-compromissos.component';
+import { CardCompromissoComponent } from './card-compromisso/card-compromisso.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-com
     ListarCompromissosComponent,
     EditarCompromissosComponent,
     ExcluirCompromissosComponent,
+    CardCompromissoComponent,
   ],
   imports: [
     CommonModule,

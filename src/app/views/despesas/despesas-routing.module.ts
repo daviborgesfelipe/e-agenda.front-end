@@ -1,5 +1,5 @@
 import { NgModule, inject } from '@angular/core';
-import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule, Routes } from '@angular/router';
 import { InserirDespesasComponent } from './inserir-despesas/inserir-despesas.component';
 import { DespesasService } from './services/despesa.service';
 import { ListarDespesasComponent } from './listar-despesas/listar-despesas.component';
@@ -27,13 +27,13 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'inserir',
-    component: InserirDespesasComponent,
-  },
-  {
     path: 'listar',
     component: ListarDespesasComponent,
     resolve: { despesas: listarDespesasResolver },
+  },
+  {
+    path: 'inserir',
+    component: InserirDespesasComponent,
   },
   {
     path: 'editar/:id',
