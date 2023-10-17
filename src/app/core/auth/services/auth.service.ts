@@ -5,12 +5,14 @@ import { environment } from "src/environments/environment";
 import { RegistrarUsuarioViewModel } from "../models/registrar-usuario.view-model";
 import { TokenViewModel } from "../models/token.view-model";
 import { LocalStorageService } from "./local-storage.service";
+import { AutenticarUsuarioViewModel } from "../models/autenticar-usuario.view-model";
 
 @Injectable()
 export class AuthService {
   private endpoint = `https://e-agenda-web-api.onrender.com/api/conta/`
   private endpointRegistra: string = this.endpoint + 'registrar';
-
+  private endpointLogin: string = this.endpoint + 'autenticar';
+  
   constructor(
     private http: HttpClient,
     private localStorage: LocalStorageService
@@ -24,6 +26,21 @@ export class AuthService {
       this.localStorage.salvarDadosLocaisUsuario(dados)
       ),
       catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
+    );
+  }
+
+  public login(
+    usuario: AutenticarUsuarioViewModel
+  ): Observable<TokenViewModel> {
+    return this.http.post<any>(this.endpointLogin, usuario).pipe(
+      // Mapeio a resposta completa para retornar apenas os dados
+      map((res) => res.dados),
+
+      // Obter o retorno do map e salvar no local-storage
+      tap((dados: TokenViewModel) =>
+        this.localStorage.salvarDadosLocaisUsuario(dados)
+      ),
+      catchError((err) => this.processarErroHttp(err))
     );
   }
 

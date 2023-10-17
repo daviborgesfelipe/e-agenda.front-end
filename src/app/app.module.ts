@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
 import { RegistroModule } from './views/registro/registro.module';
+import { LoginModule } from './views/login/login.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RegistroModule } from './views/registro/registro.module';
     
     CoreModule,
     RegistroModule,
+    LoginModule,
     DashboardModule
   ],
   providers: [],
