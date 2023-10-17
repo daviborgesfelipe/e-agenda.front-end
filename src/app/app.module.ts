@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
+import { RegistroModule } from './views/registro/registro.module';
 
 @NgModule({
   declarations: [
@@ -17,16 +18,18 @@ import { CoreModule } from './core/core.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AppRoutingModule,
+    
     NgbModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-bottom-center',
       preventDuplicates: true
     }),
-    HttpClientModule,
     
     CoreModule,
+    RegistroModule,
     DashboardModule
   ],
   providers: [],
