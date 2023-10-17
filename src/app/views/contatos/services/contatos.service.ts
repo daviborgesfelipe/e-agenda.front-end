@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
@@ -100,6 +101,7 @@ export class ContatosService {
       })
     }
   }
+
   private processarErroHttp(erro: HttpErrorResponse) {
     let mensagemErro = '';
 

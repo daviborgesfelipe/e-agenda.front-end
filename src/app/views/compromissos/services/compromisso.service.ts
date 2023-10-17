@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
 import { Observable, catchError, map, throwError } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
+import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
 import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 
@@ -31,13 +32,24 @@ export class CompromissoService {
   ): Observable<FormsCompromissosViewModel> {
     return this.http
       .put<any>(this.endpoints + id, compromisso, this.obterAutorizacao())
-      .pipe(map((res) => res.dados));
+      .pipe(
+        map((res) => res.dados),
+        catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
+      );
   }
+
+  public excluir(id: string): Observable<any> {
+    return this.http.delete(this.endpoints + id, this.obterAutorizacao());
+  }
+
 
   public selecionarTodos(): Observable<ListarCompromissoViewModel[]> {
     return this.http
       .get<any>(this.endpoints, this.obterAutorizacao())
-      .pipe(map((res) => res.dados));
+      .pipe(
+        map((res) => res.dados),
+        catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
+      );
   }
 
   public selecionarPorId(id: string): Observable<FormsCompromissosViewModel> {
@@ -52,10 +64,6 @@ export class CompromissoService {
       );
   }
 
-  public excluir(id: string): Observable<any> {
-    return this.http.delete(this.endpoints + id, this.obterAutorizacao());
-  }
-
   public selecionarCompromissoCompletoPorId(
     id: string
   ): Observable<VisualizarCompromissoViewModel> {
@@ -64,7 +72,10 @@ export class CompromissoService {
         this.endpoints + 'visualizacao-completa/' + id,
         this.obterAutorizacao()
       )
-      .pipe(map((res) => res.dados));
+      .pipe(
+        map((res) => res.dados),
+        catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
+      );
   }
 
   public obterAutorizacao(){
@@ -77,6 +88,7 @@ export class CompromissoService {
       })
     }
   }
+
   private processarErroHttp(erro: HttpErrorResponse) {
     let mensagemErro = '';
 
