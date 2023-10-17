@@ -4,10 +4,17 @@
       <h5 class="card-title mb-1 text-primary">{{compromisso.assunto}}</h5>
       <span class="card-text text-muted fw-semibold">Data: {{compromisso.data | date}}</span>
     </div>
+
+    <span class="card-text text-muted fw-semibold">
+      Nome: {{compromisso.nomeContato }}</span>
+
     <span class="card-text text-muted fw-semibold"
       >Inicio: {{compromisso.horaInicio }}</span
     >
-    <span class="card-text text-muted fw-semibold">Término: {{compromisso.horaTermino }}</span>
+    <span class="card-text text-muted fw-semibold">
+      Término: {{compromisso.horaTermino }}</span>
+
+
   </div>
 
   <div
@@ -15,7 +22,7 @@
   >
     <button
       class="btn btn-outline-success rounded-5 py-2"
-      routerLink="/tarefas/editar/{{compromisso.id}}"
+      routerLink="/compromissos/editar/{{compromisso.id}}"
       aria-label="Editar"
       ngbTooltip="Editar"
       placement="bottom"
@@ -24,7 +31,7 @@
     </button>
     <button
       class="btn btn-outline-danger rounded-5 py-2"
-      routerLink="/tarefas/excluir/{{compromisso.id}}"
+      routerLink="/compromissos/excluir/{{compromisso.id}}"
       aria-label="Excluir"
       ngbTooltip="Excluir"
       placement="bottom"

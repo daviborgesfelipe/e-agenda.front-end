@@ -4,14 +4,13 @@
       <h5 class="card-title mb-1 text-primary">
         {{ despesa.descricao }}
       </h5>
-      <span class="card-text text-muted">{{
-        despesa.data | date
-      }}</span>
     </div>
+    <span class="card-text text-muted">Data: {{ despesa.data | date }}</span>
+
     <span class="card-text text-muted fw-semibold">{{
       despesa.formaPagamento
     }}</span>
-    <span class="card-text fw-semibold">{{ despesa.valor }}</span>
+    <span class="card-text fw-semibold">R${{ despesa.valor }}</span>
   </div>
 
   <div

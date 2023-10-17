@@ -2,12 +2,12 @@
   <div class="card-body d-flex flex-column gap-1">
     <div class="d-flex flex-column">
       <h5 class="card-title mb-1 text-primary">{{tarefa.titulo}}</h5>
-      <span class="card-text text-muted">{{tarefa.dataCriacao}}</span>
+      <span class="card-text text-muted">Data: {{tarefa.dataCriacao | date }}</span>
     </div>
     <span class="card-text text-muted fw-semibold"
-      >{{tarefa.prioridade}}</span
+      >Prioridade: {{tarefa.prioridade}}</span
     >
-    <span class="card-text fw-semibold">{{tarefa.situacao}}</span>
+    <span class="card-text fw-semibold">Situação: {{tarefa.situacao}}</span>
   </div>
 
   <div

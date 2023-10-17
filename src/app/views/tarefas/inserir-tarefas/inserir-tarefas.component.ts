@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { TarefasService } from '../services/tarefas.service';
 import { ItemTarefaViewModel } from '../models/item-tarefa.view-model';
 import { StatusItemTarefa } from '../models/status-tarefa.enum';
+import { FormsTarefaViewModel } from '../models/forms-tarefas.view-models';
 
 @Component({
   selector: 'app-inserir-tarefas',
@@ -74,14 +76,22 @@ export class InserirTarefasComponent implements OnInit{
       return;
     }
 
-    this.tarefasService.inserir(this.formTarefa?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A tarefa "${res.titulo}" foi inserida com sucesso!`,
-        'Sucesso'
-      );
-
-      console.log(res);
-      this.router.navigate(['tarefas', 'listar'])
+    this.tarefasService.inserir(this.formTarefa?.value).subscribe({
+      next: (tarefa: FormsTarefaViewModel) => this.processarSucesso(tarefa),
+      error: (err: Error) => this.processarFalha(err),
     });
+  }
+
+  processarSucesso(contato: FormsTarefaViewModel) {
+    this.toastrService.success(
+      `A tarefa "${contato.titulo}" foi cadastrada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/tarefas/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }

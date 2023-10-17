@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { CategoriasService } from '../services/categoria.service';
+import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
 
 @Component({
   selector: 'app-inserir-categorias',
@@ -11,7 +13,8 @@ import { CategoriasService } from '../services/categoria.service';
 })
 export class InserirCategoriasComponent implements OnInit{
 
-  form?: FormGroup;
+  formulario!: FormGroup;
+  categoriaViewModel!: FormsCategoriaViewModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,32 +25,46 @@ export class InserirCategoriasComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.form = this.formBuilder.group({
+    this.formulario = this.formBuilder.group({
       titulo: new FormControl('', [Validators.required]),
     });
 
   }
 
   campoEstaInvalido(nome: string) {
-    return this.form?.get(nome)!.touched && this.form?.get(nome)!.invalid;
+    return this.formulario?.get(nome)!.touched && this.formulario?.get(nome)!.invalid;
   }
 
   gravar() {
-    if (this.form?.invalid) {
-      for (let erro of this.form.validate()) {
+    if (this.formulario.invalid) {
+      for (let erro of this.formulario.validate()) {
         this.toastrService.warning(erro);
       }
 
       return;
     }
 
-    this.categoriasService.inserir(this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A categoria "${res.titulo}" foi cadastrada com sucesso!`,
-        'Sucesso'
-      );
+    this.categoriaViewModel = this.formulario.value
 
-      this.router.navigate(['/categorias/listar']);
-    });
+    this.categoriasService.inserir(this.formulario?.value).subscribe(
+      {
+        next: (categoria: FormsCategoriaViewModel) => this.processarSucesso(categoria),
+        error: (erro: Error) => this.processarFalha(erro),
+      }
+    );
+  }
+
+  processarSucesso(categoria: FormsCategoriaViewModel) {
+    this.toastrService.success(
+      `A categoria "${categoria.titulo}" foi cadastrada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/categorias/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }
+

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CompromissoService } from '../services/compromisso.service';
-import { ContatosService } from '../../contatos/services/contatos.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+
+import { CompromissoService } from '../services/compromisso.service';
+import { ContatosService } from '../../contatos/services/contatos.service';
 import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
 import { ListarContatoViewModel } from '../../contatos/models/listar-contato.view-model';
 
@@ -32,7 +33,7 @@ export class InserirCompromissosComponent implements OnInit{
       tipoLocal: new FormControl(0, [Validators.required]),
       link: new FormControl(''),
       local: new FormControl(''),
-      data: new FormControl('09/10/2023', [Validators.required]),
+      data: new FormControl('19/11/2023', [Validators.required]),
       horaInicio: new FormControl('08:00', [Validators.required]),
       horaTermino: new FormControl('09:00', [Validators.required]),
       contatoId: new FormControl('')
@@ -45,17 +46,31 @@ export class InserirCompromissosComponent implements OnInit{
   }
 
   gravar(){
+
     if(this.formulario?.invalid){
       for(let erro of this.formulario.validate()) {
+        console.log(erro)
         this.toastService.warning(erro);
       }
       return
     }
-    this.compromissoService.inserir(this.formulario?.value).subscribe((res) => {
-      this.toastService.success(
-        `O compromisso "${res.assunto}" foi salvo com sucesso!`,
-        `Sucesso`
-      );
-    })
+    this.compromissoService.inserir(this.formulario?.value).subscribe({
+        next: (compromisso: FormsCompromissosViewModel) => this.processarSucesso(compromisso),
+        error: (erro: Error) => this.processarFalha(erro),
+      }
+    )
+  }
+
+  processarSucesso(compromisso: FormsCompromissosViewModel) {
+    this.toastService.success(
+      `O compromisso "${compromisso.assunto}" foi cadastrado com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/compromissos/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastService.error(erro.message, 'Error');
   }
 }

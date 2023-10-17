@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { ContatosService } from '../services/contatos.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ToastrService } from 'ngx-toastr';
+
+import { FormsContatoViewModel } from '../models/forms-contato.view-model';
+import { ContatosService } from '../services/contatos.service';
 
 @Component({
   selector: 'app-inserir-contatos',
@@ -25,11 +26,11 @@ export class InserirContatosComponent implements OnInit{
   ngOnInit(): void {
 
     this.formulario = this.formBuilder.group({
-      nome: new FormControl('', [Validators.required]),
+      nome: new FormControl('', [Validators.minLength(2), Validators.required]),
       telefone: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      cargo: new FormControl('', [Validators.required]),
-      empresa: new FormControl('', [Validators.required]),
+      cargo: new FormControl('', [Validators.minLength(2), Validators.required]),
+      empresa: new FormControl('', [Validators.minLength(2), Validators.required]),
     })
   }
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ListarCategoriaViewModel } from '../../categorias/models/listar-categoria.view-model';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+import { ListarCategoriaViewModel } from '../../categorias/models/listar-categoria.view-model';
+import { FormsDespesaViewModel } from '../models/forms-despesa.view-molde';
 import { CategoriasService } from '../../categorias/services/categoria.service';
 import { DespesasService } from '../services/despesa.service';
 
@@ -12,7 +14,7 @@ import { DespesasService } from '../services/despesa.service';
   styleUrls: ['./inserir-despesas.component.css']
 })
 export class InserirDespesasComponent implements OnInit{
-  form?: FormGroup;
+  formulario?: FormGroup;
 
   categorias: ListarCategoriaViewModel[] = [];
 
@@ -25,7 +27,7 @@ export class InserirDespesasComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
+    this.formulario = this.formBuilder.group({
       descricao: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
@@ -40,25 +42,34 @@ export class InserirDespesasComponent implements OnInit{
 
     this.categoriasService
       .selecionarTodos()
-      .subscribe((res) => (this.categorias = res));
+      .subscribe((_categorias) => (this.categorias = _categorias));
   }
 
   gravar() {
-    if (this.form?.invalid) {
-      for (let erro of this.form.validate()) {
+    if (this.formulario?.invalid) {
+      for (let erro of this.formulario.validate()) {
         this.toastrService.warning(erro);
       }
 
       return;
     }
 
-    this.despesasService.inserir(this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A despesa "${res.descricao}" foi cadastrada com sucesso!`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/despesas/listar']);
+    this.despesasService.inserir(this.formulario?.value).subscribe({
+      next: (despesas: FormsDespesaViewModel) => this.processarSucesso(despesas),
+      error: (err: Error) => this.processarFalha(err),
     });
+  }
+
+  processarSucesso(despesas: FormsDespesaViewModel) {
+    this.toastrService.success(
+      `A despesas "${despesas.descricao}" foi cadastrada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/despesas/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }
