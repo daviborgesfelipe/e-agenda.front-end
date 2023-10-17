@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 import { FormsTarefaViewModel } from "../models/forms-tarefas.view-models";
 import { ListarTarefaViewModel } from "../models/listar-tarefas.view-models";
 import { VisualizarTarefasViewModel } from "../models/visualizar-tarefa.view-model";
+import { LocalStorageService } from "src/app/core/auth/services/local-storage.service";
 
 @Injectable()
 
@@ -13,7 +14,10 @@ export class TarefasService {
   private endpoint: string =
     `https://e-agenda-web-api.onrender.com/api/tarefas/`
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorage: LocalStorageService
+  ) {}
   
   public inserir(tarefa: FormsTarefaViewModel): Observable<FormsTarefaViewModel> {
     return this.http
@@ -79,7 +83,7 @@ export class TarefasService {
   }
 
   private obterAutorizacao() {
-    const token = environment.apiKey;
+    const token = this.localStorage.obterDadosLocaisSalvos()?.chave;
 
     return {
       headers: new HttpHeaders({
