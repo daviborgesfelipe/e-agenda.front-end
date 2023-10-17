@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CategoriasService } from '../services/categoria.service';
 import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
 
+import '/src/app/extensions/form-group.extension'
+
 @Component({
   selector: 'app-inserir-categorias',
   templateUrl: './inserir-categorias.component.html',

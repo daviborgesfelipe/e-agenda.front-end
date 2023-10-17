@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CompromissoService } from '../services/compromisso.service';
 import { map } from 'rxjs';
+
+import { CompromissoService } from '../services/compromisso.service';
+import { VisualizarCompromissoViewModel } from '../models/visualizar-compromisso.view-model';
 
 @Component({
   selector: 'app-excluir-compromissos',
@@ -29,8 +30,8 @@ export class ExcluirCompromissosComponent {
     });
   }
 
-  obterContato(contato: VisualizarCompromissoViewModel) {
-    this.compromisso = contato;
+  obterContato(compromisso: VisualizarCompromissoViewModel) {
+    this.compromisso = compromisso;
   }
 
   processarSucesso() {

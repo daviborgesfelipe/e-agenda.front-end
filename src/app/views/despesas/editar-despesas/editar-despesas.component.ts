@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { FormsDespesaViewModel } from '../models/forms-despesa.view-molde';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+import { FormsDespesaViewModel } from '../models/forms-despesa.view-molde';
 import { ListarCategoriaViewModel } from '../../categorias/models/listar-categoria.view-model';
 import { CategoriasService } from '../../categorias/services/categoria.service';
 import { DespesasService } from '../services/despesa.service';
+
+import '../../../extensions/form-group.extension'
 
 @Component({
   selector: 'app-editar-despesas',
@@ -65,13 +68,22 @@ export class EditarDespesasComponent {
 
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    this.despesasService.editar(id, this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A despesa "${res.descricao}" foi cadastrada com sucesso!`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/despesas/listar']);
+    this.despesasService.editar(id, this.form?.value).subscribe({
+      next: (despesas: FormsDespesaViewModel) => this.processarSucesso(despesas),
+      error: (err: Error) => this.processarFalha(err),
     });
+  }
+
+  processarSucesso(despesas: FormsDespesaViewModel) {
+    this.toastrService.success(
+      `A despesa "${despesas.descricao}" foi editada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/despesas/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }

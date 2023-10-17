@@ -8,6 +8,8 @@ import { FormsDespesaViewModel } from '../models/forms-despesa.view-molde';
 import { CategoriasService } from '../../categorias/services/categoria.service';
 import { DespesasService } from '../services/despesa.service';
 
+import '../../../extensions/form-group.extension'
+
 @Component({
   selector: 'app-inserir-despesas',
   templateUrl: './inserir-despesas.component.html',
@@ -60,9 +62,9 @@ export class InserirDespesasComponent implements OnInit{
     });
   }
 
-  processarSucesso(despesas: FormsDespesaViewModel) {
+  processarSucesso(despesa: FormsDespesaViewModel) {
     this.toastrService.success(
-      `A despesas "${despesas.descricao}" foi cadastrada com sucesso!`,
+      `A despesa "${despesa.descricao}" foi cadastrada com sucesso!`,
       'Sucesso'
     );
 

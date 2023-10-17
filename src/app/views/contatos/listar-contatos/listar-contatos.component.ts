@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ListarContatoViewModel } from '../models/listar-contato.view-model';
-import { ContatosService } from '../services/contatos.service';
-import { map } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+
+import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 
 @Component({
   selector: 'app-listar-contatos',

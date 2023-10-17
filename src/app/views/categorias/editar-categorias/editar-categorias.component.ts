@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { CategoriasService } from '../services/categoria.service';
+import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
+
+import '/src/app/extensions/form-group.extension'
 
 @Component({
   selector: 'app-editar-categoria',
@@ -48,13 +47,24 @@ export class EditarCategoriasComponent {
 
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    this.categoriasService.editar(id, this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A categoria "${res.titulo}" foi editada com sucesso!`,
-        'Sucesso'
-      );
+    this.categoriasService.editar(id, this.form?.value).subscribe(
+      {
+        next: (categoria: FormsCategoriaViewModel) => this.processarSucesso(categoria),
+        error: (erro: Error) => this.processarFalha(erro),
+      }
+    );
+  }
 
-      this.router.navigate(['/categorias/listar']);
-    });
+  processarSucesso(categoria: FormsCategoriaViewModel) {
+    this.toastrService.success(
+      `A categoria "${categoria.titulo}" foi editada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/categorias/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }

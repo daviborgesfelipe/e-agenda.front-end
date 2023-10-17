@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
-import { CompromissoService } from '../services/compromisso.service'
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 
+import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
 
 @Component({
   selector: 'app-listar-compromissos',

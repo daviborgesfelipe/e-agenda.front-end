@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormsContatoViewModel } from '../models/forms-contato.view-model';
 import { ContatosService } from '../services/contatos.service';
 
+import '../../../extensions/form-group.extension'
+
 @Component({
   selector: 'app-inserir-contatos',
   templateUrl: './inserir-contatos.component.html',

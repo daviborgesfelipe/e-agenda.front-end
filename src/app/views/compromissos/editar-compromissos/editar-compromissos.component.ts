@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
 import { ContatosService } from '../../contatos/services/contatos.service';
 import { CompromissoService } from '../services/compromisso.service';
 import { ListarContatoViewModel } from '../../contatos/models/listar-contato.view-model';
-import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
+
+import '../../../extensions/form-group.extension'
 
 @Component({
   selector: 'app-editar-compromissos',
@@ -75,13 +73,24 @@ export class EditarCompromissosComponent implements OnInit {
 
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    this.compromissosService.editar(id, this.form?.value).subscribe((res) => {
-      this.toastrService.success(
-        `O compromisso "${res.assunto}" foi salvo com sucesso!`,
-        'Sucesso'
-      );
-
-      this.router.navigate(['/compromissos', 'listar']);
-    });
+    this.compromissosService.editar(id, this.form?.value).subscribe({
+          next: (compromisso: FormsCompromissosViewModel) => this.processarSucesso(compromisso),
+          error: (erro: Error) => this.processarFalha(erro),
+        }
+      )
+  }
+  
+  processarSucesso(compromisso: FormsCompromissosViewModel) {
+    this.toastrService.success(
+      `O compromisso "${compromisso.assunto}" foi editado com sucesso!`,
+      'Sucesso'
+    );
+      
+    this.router.navigate(['/compromissos/listar']);
+  }
+  
+  processarFalha(erro: Error) {
+      this.toastrService.error(erro.message, 'Error');
   }
 }
+  

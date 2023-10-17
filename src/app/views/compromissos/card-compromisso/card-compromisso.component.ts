@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-model';
 
 @Component({

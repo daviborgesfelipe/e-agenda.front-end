@@ -8,6 +8,8 @@ import { ItemTarefaViewModel } from '../models/item-tarefa.view-model';
 import { StatusItemTarefa } from '../models/status-tarefa.enum';
 import { FormsTarefaViewModel } from '../models/forms-tarefas.view-models';
 
+import '../../../extensions/form-group.extension'
+
 @Component({
   selector: 'app-inserir-tarefas',
   templateUrl: './inserir-tarefas.component.html',

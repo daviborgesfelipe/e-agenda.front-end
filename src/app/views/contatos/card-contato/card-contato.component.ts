@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 
 @Component({

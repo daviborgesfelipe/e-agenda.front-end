@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+
 import { VisualizarContatoViewModel } from '../models/visualizar-cotato.view-model';
 import { ContatosService } from '../services/contatos.service';
-import { ToastrService } from 'ngx-toastr';
-import { FormsContatoViewModel } from '../models/forms-contato.view-model';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-excluir-contatos',

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsTarefaViewModel } from '../models/forms-tarefas.view-models';
-import { ListarTarefaViewModel } from '../models/listar-tarefas.view-models';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
+import { FormsTarefaViewModel } from '../models/forms-tarefas.view-models';
 import { TarefasService } from '../services/tarefas.service';
 import { ItemTarefaViewModel } from '../models/item-tarefa.view-model';
 import { StatusItemTarefa } from '../models/status-tarefa.enum';
-import { VisualizarTarefasViewModel } from '../models/visualizar-tarefa.view-model';
+
+import '../../../extensions/form-group.extension'
 
 @Component({
   selector: 'app-editar-tarefas',
@@ -108,14 +109,22 @@ export class EditarTarefasComponent implements OnInit{
     }
     const id = this.route.snapshot.paramMap.get('id')!;
 
-    this.tarefasService.editar(id ,this.formTarefa?.value).subscribe((res) => {
-      this.toastrService.success(
-        `A tarefa "${res.titulo}" foi editada com sucesso!`,
-        'Sucesso'
-      );
-
-      console.log(res);
-      this.router.navigate(['tarefas', 'listar'])
+    this.tarefasService.editar(id ,this.formTarefa?.value).subscribe({
+      next: (tarefa: FormsTarefaViewModel) => this.processarSucesso(tarefa),
+      error: (err: Error) => this.processarFalha(err),
     });
+  }
+
+  processarSucesso(tarefa: FormsTarefaViewModel) {
+    this.toastrService.success(
+      `A tarefa "${tarefa.titulo}" foi editada com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/tarefas/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }

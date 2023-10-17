@@ -8,6 +8,8 @@ import { ContatosService } from '../../contatos/services/contatos.service';
 import { FormsCompromissosViewModel } from '../models/form-compromissos.view-model';
 import { ListarContatoViewModel } from '../../contatos/models/listar-contato.view-model';
 
+import '../../../extensions/form-group.extension'
+
 @Component({
   selector: 'app-inserir-compromissos',
   templateUrl: './inserir-compromissos.component.html',

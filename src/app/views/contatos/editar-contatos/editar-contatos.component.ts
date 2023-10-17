@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormsContatoViewModel } from '../models/forms-contato.view-model';
-import { ContatosService } from '../services/contatos.service';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
+
+import { ContatosService } from '../services/contatos.service';
+import { FormsContatoViewModel } from '../models/forms-contato.view-model';
+
+import '../../../extensions/form-group.extension'
 
 @Component({
   selector: 'app-editar-contatos',

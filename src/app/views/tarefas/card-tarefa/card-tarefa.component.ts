@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+
 import { ListarTarefaViewModel } from '../models/listar-tarefas.view-models';
 
 @Component({

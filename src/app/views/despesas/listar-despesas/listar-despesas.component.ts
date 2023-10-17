@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ListarDespesaViewModel } from '../models/listar-despesa.view-model';
 import { ActivatedRoute } from '@angular/router';
+
+import { ListarDespesaViewModel } from '../models/listar-despesa.view-model';
 
 @Component({
   selector: 'app-listar-despesas',

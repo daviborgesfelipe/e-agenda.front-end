@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { ListarCategoriaViewModel } from '../models/listar-categoria.view-model';
 
 @Component({

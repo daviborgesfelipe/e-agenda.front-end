@@ -1,9 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ContatosRoutingModule } from './../../contatos/contatos-routing.module';
 import { Component, OnInit } from '@angular/core';
+
 import { VisualizarCategoriaViewModel } from '../models/visualizar-categoria.view-model';
 import { CategoriasService } from '../services/categoria.service';
+import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
 
 @Component({
   selector: 'app-excluir-categoria',
@@ -25,13 +26,24 @@ export class ExcluirCategoriasComponent implements OnInit {
   }
 
   gravar() {
-    this.categoriasService.excluir(this.categoriaVM!.id).subscribe(() => {
-      this.toastrService.success(
-        `A categoria foi excluída com sucesso!`,
-        'Sucesso'
-      );
+    this.categoriasService.excluir(this.categoriaVM!.id).subscribe(
+      {
+        next: (categoria: FormsCategoriaViewModel) => this.processarSucesso(categoria),
+        error: (erro: Error) => this.processarFalha(erro),
+      }
+    );
+  }
 
-      this.router.navigate(['/categorias', 'listar']);
-    });
+  processarSucesso(categoria: FormsCategoriaViewModel) {
+    this.toastrService.success(
+      `A categoria foi excluida com sucesso!`,
+      'Sucesso'
+    );
+
+    this.router.navigate(['/categorias/listar']);
+  }
+
+  processarFalha(erro: Error) {
+    this.toastrService.error(erro.message, 'Error');
   }
 }
