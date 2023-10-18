@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +11,12 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { CoreModule } from './core/core.module';
 import { RegistroModule } from './views/registro/registro.module';
 import { LoginModule } from './views/login/login.module';
+import { AuthService } from './core/auth/services/auth.service';
+
+function logarUsuarioSalvoFactory(authService: AuthService) {
+  return () => authService.logarUsuarioSalvo();
+}
+
 
 @NgModule({
   declarations: [
@@ -34,7 +40,13 @@ import { LoginModule } from './views/login/login.module';
     LoginModule,
     DashboardModule
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: logarUsuarioSalvoFactory,
+    deps: [AuthService],
+    multi: true,
+
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

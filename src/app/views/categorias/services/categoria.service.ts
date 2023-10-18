@@ -6,7 +6,6 @@ import { FormsCategoriaViewModel } from '../models/forms-categoria.view-model';
 import { ListarCategoriaViewModel } from '../models/listar-categoria.view-model';
 import { VisualizarCategoriaViewModel } from '../models/visualizar-categoria.view-model';
 import { LocalStorageService } from 'src/app/core/auth/services/local-storage.service';
-import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CategoriasService {

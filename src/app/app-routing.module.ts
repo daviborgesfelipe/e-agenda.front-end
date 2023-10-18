@@ -1,52 +1,61 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { authGuard } from './core/auth/guards/auth.guard';
+
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [authGuard]
   },
 
 //Contatos
-
   {
     path: 'contatos',
     loadChildren: () =>
       import('./views/contatos/contatos.module').then((m) => m.ContatosModule),
+    canActivate: [authGuard]
   },
 
  //Compromissos
  {
-  path: 'compromissos',
-  loadChildren: () =>
-    import('./views/compromissos/compromissos.module').then((m) => m.CompromissosModule),
+    path: 'compromissos',
+    loadChildren: () =>
+      import('./views/compromissos/compromissos.module').then((m) => m.CompromissosModule),
+    canActivate: [authGuard]
   },
 
   //Categorias
  {
-  path: 'categorias',
-  loadChildren: () =>
-    import('./views/categorias/categorias.module').then((m) => m.CategoriasModule),
+    path: 'categorias',
+    loadChildren: () =>
+      import('./views/categorias/categorias.module').then((m) => m.CategoriasModule),
+    canActivate: [authGuard]
   },
 
   //Despesas
  {
-  path: 'despesas',
-  loadChildren: () =>
-    import('./views/despesas/despesas.module').then((m) => m.DespesasModule),
+    path: 'despesas',
+    loadChildren: () =>
+      import('./views/despesas/despesas.module').then((m) => m.DespesasModule),
+    canActivate: [authGuard]
   },
 
  //Tarefas
  {
-  path: 'tarefas',
-  loadChildren: () =>
-    import('./views/tarefas/tarefas.module').then((m) => m.TarefasModule),
+    path: 'tarefas',
+    loadChildren: () =>
+      import('./views/tarefas/tarefas.module').then((m) => m.TarefasModule),
+    canActivate: [authGuard] 
   },
 ];
 
