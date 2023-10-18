@@ -16,7 +16,9 @@
       [ngbCollapse]="estaColapsada == true"
       
       >
-      <div class="links w-100 text-center">
+      <div 
+        *ngIf="(usuarioEstaLogado$ | async) == true"
+        class="links w-100 text-center">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
