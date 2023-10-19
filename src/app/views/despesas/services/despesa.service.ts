@@ -22,15 +22,12 @@ export class DespesasService {
     despesa: FormsDespesaViewModel
   ): Observable<FormsDespesaViewModel> {
     return this.http
-      .post<any>(this.endpoint, despesa, this.obterHeadersAutorizacao())
+      .post<any>(this.endpoint, despesa)
       .pipe(map((res) => res.dados));
   }
 
   public excluir(id: string): Observable<any> {
-    return this.http.delete<any>(
-      this.endpoint + id,
-      this.obterHeadersAutorizacao()
-    );
+    return this.http.delete<any>(this.endpoint + id);
   }
 
   public editar(
@@ -38,19 +35,19 @@ export class DespesasService {
     despesa: FormsDespesaViewModel
   ): Observable<FormsDespesaViewModel> {
     return this.http
-      .put<any>(this.endpoint + id, despesa, this.obterHeadersAutorizacao())
+      .put<any>(this.endpoint + id, despesa)
       .pipe(map((res) => res.dados));
   }
 
   public selecionarTodos(): Observable<ListarDespesaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint, this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint)
       .pipe(map((res) => res.dados));
   }
 
   public selecionarPorId(id: string): Observable<FormsDespesaViewModel> {
     return this.http
-      .get<any>(this.endpoint + id, this.obterHeadersAutorizacao())
+      .get<any>(this.endpoint + id)
       .pipe(map((res) => res.dados));
   }
 
@@ -58,10 +55,7 @@ export class DespesasService {
     id: string
   ): Observable<VisualizarDespesaViewModel> {
     return this.http
-      .get<any>(
-        this.endpoint + 'visualizacao-completa/' + id,
-        this.obterHeadersAutorizacao()
-      )
+      .get<any>(this.endpoint + 'visualizacao-completa/' + id)
       .pipe(map((res) => res.dados));
   }
 

@@ -19,11 +19,7 @@ export class CompromissoService {
 
   public inserir(compromisso: FormsCompromissosViewModel): Observable<FormsCompromissosViewModel> {
     return this.http
-    .post<any>(
-      this.endpoints,
-      compromisso,
-      this.obterAutorizacao()
-    )
+    .post<any>( this.endpoints, compromisso)
     .pipe(
       map((res) => res.dados),
       // Interceptar e tratar a mensagem de erro
@@ -36,7 +32,7 @@ export class CompromissoService {
     compromisso: FormsCompromissosViewModel
   ): Observable<FormsCompromissosViewModel> {
     return this.http
-      .put<any>(this.endpoints + id, compromisso, this.obterAutorizacao())
+      .put<any>(this.endpoints + id, compromisso)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -44,13 +40,13 @@ export class CompromissoService {
   }
 
   public excluir(id: string): Observable<any> {
-    return this.http.delete(this.endpoints + id, this.obterAutorizacao());
+    return this.http.delete(this.endpoints + id);
   }
 
 
   public selecionarTodos(): Observable<ListarCompromissoViewModel[]> {
     return this.http
-      .get<any>(this.endpoints, this.obterAutorizacao())
+      .get<any>(this.endpoints)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -59,7 +55,7 @@ export class CompromissoService {
 
   public selecionarPorId(id: string): Observable<FormsCompromissosViewModel> {
     return this.http
-      .get<any>(this.endpoints + id, this.obterAutorizacao())
+      .get<any>(this.endpoints + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => {
@@ -73,10 +69,7 @@ export class CompromissoService {
     id: string
   ): Observable<VisualizarCompromissoViewModel> {
     return this.http
-      .get<any>(
-        this.endpoints + 'visualizacao-completa/' + id,
-        this.obterAutorizacao()
-      )
+      .get<any>(this.endpoints + 'visualizacao-completa/' + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))

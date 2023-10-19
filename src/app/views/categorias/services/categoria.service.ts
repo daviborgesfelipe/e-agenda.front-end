@@ -21,7 +21,7 @@ export class CategoriasService {
     categoria: FormsCategoriaViewModel
   ): Observable<FormsCategoriaViewModel> {
     return this.http
-      .post<any>(this.endpoint, categoria, this.obterAutorizacao())
+      .post<any>(this.endpoint, categoria)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -33,7 +33,7 @@ export class CategoriasService {
     categoria: FormsCategoriaViewModel
   ): Observable<FormsCategoriaViewModel> {
     return this.http
-      .put<any>(this.endpoint + id, categoria, this.obterAutorizacao())
+      .put<any>(this.endpoint + id, categoria)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -42,7 +42,7 @@ export class CategoriasService {
 
   public excluir(id: string): Observable<any> {
     return this.http.delete<any>(
-      this.endpoint + id, this.obterAutorizacao())
+      this.endpoint + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -51,7 +51,7 @@ export class CategoriasService {
 
   public selecionarPorId(id: string): Observable<FormsCategoriaViewModel> {
     return this.http
-      .get<any>(this.endpoint + id, this.obterAutorizacao())
+      .get<any>(this.endpoint + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -60,7 +60,7 @@ export class CategoriasService {
 
   public selecionarTodos(): Observable<ListarCategoriaViewModel[]> {
     return this.http
-      .get<any>(this.endpoint, this.obterAutorizacao())
+      .get<any>(this.endpoint)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))
@@ -71,10 +71,7 @@ export class CategoriasService {
     id: string
   ): Observable<VisualizarCategoriaViewModel> {
     return this.http
-      .get<any>(
-        this.endpoint + 'visualizacao-completa/' + id,
-        this.obterAutorizacao()
-      )
+      .get<any>(this.endpoint + 'visualizacao-completa/' + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => this.processarErroHttp(err))

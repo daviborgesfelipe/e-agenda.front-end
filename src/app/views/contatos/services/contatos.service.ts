@@ -21,8 +21,7 @@ export class ContatosService {
     return this.http
     .post<any>(
      this.endpoints,
-     contato,
-     this.obterAutorizacao()
+     contato
     )
     .pipe(
       map((res) => res.dados),
@@ -33,7 +32,7 @@ export class ContatosService {
 
   public editar(id: string, contato: FormsContatoViewModel) {
     return this.http
-      .put<any>(this.endpoints + id, contato, this.obterAutorizacao())
+      .put<any>(this.endpoints + id, contato)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => {
@@ -44,7 +43,7 @@ export class ContatosService {
   }
 
   public excluir(id: string): Observable<any> {
-    return this.http.delete(this.endpoints + id, this.obterAutorizacao())
+    return this.http.delete(this.endpoints + id)
     .pipe(
       map((res) => res),
       catchError((err: HttpErrorResponse) => {
@@ -56,7 +55,7 @@ export class ContatosService {
 
   public selecionarTodos(): Observable<ListarContatoViewModel[]> {
     return this.http
-      .get<any>(this.endpoints, this.obterAutorizacao())
+      .get<any>(this.endpoints)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => {
@@ -68,7 +67,7 @@ export class ContatosService {
 
   public selecionarPorId(id: string): Observable<FormsContatoViewModel> {
     return this.http
-      .get<any>(this.endpoints + id, this.obterAutorizacao())
+      .get<any>(this.endpoints + id)
       .pipe(
         map((res) => res.dados),
         catchError((err: HttpErrorResponse) => {
@@ -83,8 +82,7 @@ export class ContatosService {
   ): Observable<VisualizarContatoViewModel> {
     return this.http
       .get<any>(
-        this.endpoints + 'visualizacao-completa/' + id,
-        this.obterAutorizacao()
+        this.endpoints + 'visualizacao-completa/' + id
       )
       .pipe(
         map((res) => res.dados),

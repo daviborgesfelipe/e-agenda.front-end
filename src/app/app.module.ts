@@ -1,7 +1,7 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHandlerFn, HttpInterceptorFn, HttpRequest, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -12,11 +12,12 @@ import { CoreModule } from './core/core.module';
 import { RegistroModule } from './views/registro/registro.module';
 import { LoginModule } from './views/login/login.module';
 import { AuthService } from './core/auth/services/auth.service';
+import { LocalStorageService } from './core/auth/services/local-storage.service';
+import { httpTokenInterceptor } from './core/auth/interceptors/http-token.interceptor';
 
 function logarUsuarioSalvoFactory(authService: AuthService) {
   return () => authService.logarUsuarioSalvo();
 }
-
 
 @NgModule({
   declarations: [
@@ -25,7 +26,6 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     
     NgbModule,
@@ -40,13 +40,20 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
     LoginModule,
     DashboardModule
   ],
-  providers: [{
+  providers: [
+    {
     provide: APP_INITIALIZER,
     useFactory: logarUsuarioSalvoFactory,
     deps: [AuthService],
     multi: true,
 
-  }],
+    },
+    provideHttpClient(
+      withInterceptors([
+        httpTokenInterceptor
+      ])
+    )
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
