@@ -14,6 +14,10 @@ import { CardContatoComponent } from './card-contato/card-contato.component';
 import { ContatosRoutingModule } from './contatos-routing.module';
 
 import 'src/app/extensions/form-group.extension'
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -28,10 +32,14 @@ import 'src/app/extensions/form-group.extension'
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
-    ContatosRoutingModule
+    ContatosRoutingModule,  
+    MatCardModule,  
+    MatButtonModule, 
+    MatDividerModule,
+    MatProgressBarModule 
   ],
   providers: [
-    ContatosService
+    ContatosService,
   ]
 })
 export class ContatosModule { }

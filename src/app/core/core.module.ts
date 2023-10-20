@@ -5,6 +5,10 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModule } from './auth/auth.module';
 import { LoadingModule } from './loading/loading.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -22,7 +26,11 @@ import { LoadingModule } from './loading/loading.module';
   exports: [
     NavbarComponent,
     AuthModule,
-    LoadingModule
+    LoadingModule, 
+    MatCardModule,  
+    MatButtonModule, 
+    MatDividerModule,
+    MatProgressBarModule 
   ]
 })
 export class CoreModule { }

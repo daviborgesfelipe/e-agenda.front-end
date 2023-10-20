@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <!-- Conteúdo principal -->
-    <div class="col-12 col-md-10 col-lg-9 mx-auto mt-5">
+    <div class="col-12 col-md-10 col-lg-10 mx-auto mt-5">
       <!-- Titulo -->
       <div class="text-md-start">
         <h1 class="fw-bold text-primary">Listar Compromissos</h1>
@@ -21,9 +21,9 @@
       </div>
       
       <!-- Listagem de Registros -->
-      <div class="row mt-3 g-3 justify-items-sm-center">
+      <div class="row mt-3 g-5 justify-content-md-center">
 
-        <div *ngFor="let compromisso of compromissos" class="col-12 col-md-6 col-lg-4">
+        <div *ngFor="let compromisso of compromissos" class="col-12 col-md-6 col-lg-5">
          
           <app-card-compromisso [compromisso]="compromisso"></app-card-compromisso>
         

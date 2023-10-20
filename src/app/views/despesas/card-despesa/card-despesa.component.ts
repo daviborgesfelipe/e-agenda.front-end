@@ -9,4 +9,6 @@ import { ListarDespesaViewModel } from '../models/listar-despesa.view-model';
 })
 export class CardDespesaComponent {
 @Input({ required: true }) despesa!: ListarDespesaViewModel
+
+tituloCard = 'Despesa'
 }

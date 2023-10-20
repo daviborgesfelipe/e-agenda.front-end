@@ -9,4 +9,6 @@ import { ListarCompromissoViewModel } from '../models/listar-compromisso.view-mo
 })
 export class CardCompromissoComponent {
   @Input({required: true }) compromisso!: ListarCompromissoViewModel
+
+  tituloCard = `Compromisso`
 }

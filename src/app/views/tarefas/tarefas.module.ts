@@ -12,6 +12,10 @@ import { ListarTarefasComponent } from './listar-tarefas/listar-tarefas.componen
 import { EditarTarefasComponent } from './editar-tarefas/editar-tarefas.component';
 import { ExcluirTarefasComponent } from './excluir-tarefas/excluir-tarefas.component';
 import { CardTarefaComponent } from './card-tarefa/card-tarefa.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -28,7 +32,11 @@ import { CardTarefaComponent } from './card-tarefa/card-tarefa.component';
     TarefasRoutingModule,
     NgSelectModule, 
     NgbTooltipModule,
-    RouterModule
+    RouterModule,  
+    MatCardModule,  
+    MatButtonModule, 
+    MatDividerModule,
+    MatProgressBarModule 
   ],
   providers: [
     TarefasService

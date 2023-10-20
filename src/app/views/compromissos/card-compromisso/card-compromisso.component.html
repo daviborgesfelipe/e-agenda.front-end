@@ -1,42 +1,28 @@
-<div class="card h-100 border-dark">
-  <div class="card-body d-flex flex-column gap-1">
-    <div class="d-flex flex-column">
-      <h5 class="card-title mb-1 text-primary">{{compromisso.assunto}}</h5>
-      <span class="card-text text-muted fw-semibold">Data: {{compromisso.data | date}}</span>
-    </div>
-
-    <span class="card-text text-muted fw-semibold">
-      Nome: {{compromisso.nomeContato }}</span>
-
-    <span class="card-text text-muted fw-semibold"
-      >Inicio: {{compromisso.horaInicio }}</span
-    >
-    <span class="card-text text-muted fw-semibold">
-      Término: {{compromisso.horaTermino }}</span>
-
-
-  </div>
-
-  <div
-    class="d-flex gap-1 justify-content-end card-footer bg-transparent"
-  >
-    <button
-      class="btn btn-outline-success rounded-5 py-2"
-      routerLink="/compromissos/editar/{{compromisso.id}}"
-      aria-label="Editar"
-      ngbTooltip="Editar"
-      placement="bottom"
-    >
-      <i class="bi bi-pen"></i>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>{{ tituloCard }}</mat-card-subtitle>
+    <mat-card-title>{{ compromisso.assunto }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card-subtitle class="conteudo"> Data: {{ compromisso.data | date }}</mat-card-subtitle>
+    <mat-card-subtitle class="conteudo"> Contato: {{ compromisso.nomeContato }}</mat-card-subtitle>
+    <mat-card-subtitle class="conteudo"> Inicio: {{ compromisso.horaInicio }}</mat-card-subtitle>
+    <mat-card-subtitle class="conteudo"> Término: {{ compromisso.horaTermino }}</mat-card-subtitle>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button 
+      mat-button
+      routerLink="/compromissos/excluir/{{ compromisso.id }}"
+      >Excluir
     </button>
-    <button
-      class="btn btn-outline-danger rounded-5 py-2"
-      routerLink="/compromissos/excluir/{{compromisso.id}}"
-      aria-label="Excluir"
-      ngbTooltip="Excluir"
-      placement="bottom"
-    >
-      <i class="bi bi-trash"></i>
+    <button 
+      mat-button
+      routerLink="/compromissos/editar/{{ compromisso.id }}"
+      >Editar
     </button>
-  </div>
-</div>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

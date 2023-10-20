@@ -14,6 +14,10 @@ import { CompromissosRoutingModule } from './compromissos-routing.module';
 import { ContatosModule } from '../contatos/contatos.module';
 import { ExcluirCompromissosComponent } from './excluir-compromissos/excluir-compromissos.component';
 import { CardCompromissoComponent } from './card-compromisso/card-compromisso.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { CardCompromissoComponent } from './card-compromisso/card-compromisso.co
     RouterModule,
     NgbModule,
     CompromissosRoutingModule,
-    ContatosModule
+    ContatosModule,  
+    MatCardModule,  
+    MatButtonModule, 
+    MatDividerModule,
+    MatProgressBarModule 
   ],
   providers: [
     ContatosService,

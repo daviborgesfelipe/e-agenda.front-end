@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { CategoriasModule } from '../categorias/categorias.module';
 import { DespesasRoutingModule } from './despesas-routing.module';
@@ -27,7 +31,11 @@ import 'src/app/extensions/form-group.extension';
     ReactiveFormsModule,
     DespesasRoutingModule,
     NgSelectModule,
-    CategoriasModule
+    CategoriasModule,  
+    MatCardModule,  
+    MatButtonModule, 
+    MatDividerModule,
+    MatProgressBarModule
   ],
   providers: [
     DespesasService,

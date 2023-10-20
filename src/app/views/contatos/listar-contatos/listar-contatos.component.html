@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row">
+  <!-- <div class="row"> -->
     <!-- Conteúdo principal -->
-    <div class="col-12 col-md-10 col-lg-9 mx-auto mt-5">
+    <div class="col-8 col-md-10 col-lg-12 mx-auto mt-5">
       <!-- Titulo -->
       <div class="text-md-start">
         <h1 class="fw-bold text-primary">Listar Contatos</h1>
@@ -21,12 +21,12 @@
       </div>
 
       <!-- Listagem de Registros -->
-      <div class="row mt-3 g-2">
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let contato of contatos">
+      <div class="row mt-3 g-5 justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5" *ngFor="let contato of contatos">
           <app-card-contato [contato]="contato"></app-card-contato>
         </div>
       </div>
       
     </div>
-  </div>
+  <!-- </div> -->
 </div>

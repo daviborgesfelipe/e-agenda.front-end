@@ -9,4 +9,6 @@ import { ListarCategoriaViewModel } from '../models/listar-categoria.view-model'
 })
 export class CardCategoriaComponent {
   @Input({ required: true }) categoria!: ListarCategoriaViewModel;
+
+  tituloCard = `Categoria`
 }

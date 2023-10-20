@@ -1,38 +1,26 @@
-<div class="card h-100 border-dark">
-  <div class="card-body d-flex flex-column gap-1">
-    <div class="d-flex flex-column">
-      <h5 class="card-title mb-1 text-primary">
-        {{ despesa.descricao }}
-      </h5>
-    </div>
-    <span class="card-text text-muted">Data: {{ despesa.data | date }}</span>
-
-    <span class="card-text text-muted fw-semibold">{{
-      despesa.formaPagamento
-    }}</span>
-    <span class="card-text fw-semibold">{{ despesa.valor | currency : 'BRL' }}</span>
-  </div>
-
-  <div
-    class="d-flex gap-1 justify-content-end card-footer bg-transparent"
-  >
-    <button
-      class="btn btn-outline-success rounded-5 py-2"
-      routerLink="/despesas/editar/{{ despesa.id }}"
-      aria-label="Editar"
-      ngbTooltip="Editar"
-      placement="bottom"
-    >
-      <i class="bi bi-pen"></i>
-    </button>
-    <button
-      class="btn btn-outline-danger rounded-5 py-2"
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>{{ tituloCard }}</mat-card-subtitle>
+    <mat-card-title>{{ despesa.descricao }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Data: {{ despesa.data | date }}</p>
+    <p>{{ despesa.valor | currency : 'BRL' }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <button 
+      mat-button
       routerLink="/despesas/excluir/{{ despesa.id }}"
-      aria-label="Excluir"
-      ngbTooltip="Excluir"
-      placement="bottom"
-    >
-      <i class="bi bi-trash"></i>
+      >Excluir
     </button>
-  </div>
-</div>
+    <button 
+      mat-button
+      routerLink="/despesas/editar/{{ despesa.id }}"
+      >Editar
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

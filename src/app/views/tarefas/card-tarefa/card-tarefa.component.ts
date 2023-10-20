@@ -9,4 +9,6 @@ import { ListarTarefaViewModel } from '../models/listar-tarefas.view-models';
 })
 export class CardTarefaComponent {
   @Input({ required: true }) tarefa!: ListarTarefaViewModel; 
+
+  tituloCard = 'Tarefa'
 }

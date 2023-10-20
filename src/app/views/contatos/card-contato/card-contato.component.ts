@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 
@@ -9,4 +11,5 @@ import { ListarContatoViewModel } from '../models/listar-contato.view-model';
 })
 export class CardContatoComponent {
   @Input({ required: true }) contato!: ListarContatoViewModel;
+  tituloCard = `Contato`
 }

@@ -16,6 +16,8 @@ import { LoginModule } from './views/login/login.module';
 import { AuthService } from './core/auth/services/auth.service';
 import { LocalStorageService } from './core/auth/services/local-storage.service';
 import { httpTokenInterceptor } from './core/auth/interceptors/http-token.interceptor';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 registerLocaleData(localePT);
 
@@ -31,7 +33,9 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    
+      
+    MatCardModule,  
+    MatButtonModule,
     NgbModule,
     ToastrModule.forRoot({
       timeOut: 5000,
