@@ -10,7 +10,7 @@
     <span class="card-text text-muted fw-semibold">{{
       despesa.formaPagamento
     }}</span>
-    <span class="card-text fw-semibold">R${{ despesa.valor }}</span>
+    <span class="card-text fw-semibold">{{ despesa.valor | currency : 'BRL' }}</span>
   </div>
 
   <div

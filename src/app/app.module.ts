@@ -1,4 +1,6 @@
-import { APP_INITIALIZER, NgModule, inject } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, DEFAULT_CURRENCY_CODE, NgModule, inject } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpHandlerFn, HttpInterceptorFn, HttpRequest, provideHttpClient, withInterceptors } from '@angular/common/http';
@@ -14,6 +16,8 @@ import { LoginModule } from './views/login/login.module';
 import { AuthService } from './core/auth/services/auth.service';
 import { LocalStorageService } from './core/auth/services/local-storage.service';
 import { httpTokenInterceptor } from './core/auth/interceptors/http-token.interceptor';
+
+registerLocaleData(localePT);
 
 function logarUsuarioSalvoFactory(authService: AuthService) {
   return () => authService.logarUsuarioSalvo();
@@ -52,7 +56,15 @@ function logarUsuarioSalvoFactory(authService: AuthService) {
       withInterceptors([
         httpTokenInterceptor
       ])
-    )
+    ),
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-br'
+    },
+    { 
+      provide: DEFAULT_CURRENCY_CODE, 
+      useValue: 'BRL'
+    },
   ],
   bootstrap: [AppComponent]
 })
