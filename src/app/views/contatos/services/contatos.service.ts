@@ -42,6 +42,18 @@ export class ContatosService {
       );
   }
 
+  public favoritar(id: string, contato: FormsContatoViewModel) {
+    return this.http
+      .put<any>(this.endpoints + "favoritos/" + id, contato)
+      .pipe(
+        map((res) => res.dados),
+        catchError((err: HttpErrorResponse) => {
+          console.log(err)
+          return this.processarErroHttp(err)
+        })
+      );
+  }
+
   public excluir(id: string): Observable<any> {
     return this.http.delete(this.endpoints + id)
     .pipe(
@@ -69,7 +81,7 @@ export class ContatosService {
     return this.http
       .get<any>(this.endpoints + id)
       .pipe(
-        map((res) => res.dados),
+        map((res: any) => res.dados),
         catchError((err: HttpErrorResponse) => {
           console.log(err)
           return this.processarErroHttp(err)

@@ -1,18 +1,14 @@
 import { NgModule, inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  ResolveFn,
-  RouterModule,
-  Routes,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
+
 import { InserirContatosComponent } from './inserir-contatos/inserir-contatos.component';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
+import { ContatosService } from './services/contatos.service';
 import { FormsContatoViewModel } from './models/forms-contato.view-model';
 import { ListarContatoViewModel } from './models/listar-contato.view-model';
 import { VisualizarContatoViewModel } from './models/visualizar-cotato.view-model';
-import { ContatosService } from './services/contatos.service';
 
 const listarContatosResolver: ResolveFn<ListarContatoViewModel[]> = () => {
   return inject(ContatosService).selecionarTodos();

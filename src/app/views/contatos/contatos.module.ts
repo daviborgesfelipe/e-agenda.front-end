@@ -4,20 +4,21 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { ContatosService } from './services/contatos.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+
+import { ContatosRoutingModule } from './contatos-routing.module';
 import { InserirContatosComponent } from './inserir-contatos/inserir-contatos.component';
 import { ListarContatosComponent } from './listar-contatos/listar-contatos.component';
 import { EditarContatosComponent } from './editar-contatos/editar-contatos.component';
 import { ExcluirContatosComponent } from './excluir-contatos/excluir-contatos.component';
 import { CardContatoComponent } from './card-contato/card-contato.component';
-
-import { ContatosRoutingModule } from './contatos-routing.module';
+import { ContatosService } from './services/contatos.service';
 
 import 'src/app/extensions/form-group.extension'
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatCardModule,  
     MatButtonModule, 
     MatDividerModule,
-    MatProgressBarModule 
+    MatProgressBarModule,
+    MatIconModule ,
   ],
   providers: [
     ContatosService,

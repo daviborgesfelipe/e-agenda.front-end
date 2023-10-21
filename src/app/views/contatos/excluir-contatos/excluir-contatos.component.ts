@@ -21,7 +21,7 @@ export class ExcluirContatosComponent {
     private router: Router,
     private toastService: ToastrService 
   ) {
-    this.contatoVM = new VisualizarContatoViewModel('', '', '', '', '', '');
+    this.contatoVM = new VisualizarContatoViewModel('', '', '', '', '', '', false);
   }
 
   ngOnInit(): void {
